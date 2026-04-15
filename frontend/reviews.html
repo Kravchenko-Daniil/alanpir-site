@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отзывы — АланПир</title>
+  <meta name="description" content="Отзывы клиентов пекарни АланПир." />
+  <meta name="api-base" content="/api" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__row">
+      <a class="logo" href="index.html"><span>Алан</span>Пир</a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="reviews.html" class="active">Отзывы</a>
+      </nav>
+      <div class="topbar__actions">
+        <a class="phone-link" href="tel:+79263863370">+7 (926) 386-33-70</a>
+        <button class="btn" data-auth-trigger>Личный кабинет</button>
+        <button class="btn btn--black cart-button" data-cart-toggle>
+          <span>Корзина</span>
+          <span data-cart-count>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__card">
+          <p class="muted">Отзывы</p>
+          <h1>Что говорят наши гости</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="reviews-wrap">
+          <iframe class="yandex-reviews" src="https://yandex.ru/maps-reviews-widget/33319278533?comments" frameborder="0"></iframe>
+          <p class="muted reviews-link">
+            <a href="https://yandex.ru/maps/org/osetinskiye_pirogi_nashpir/33319278533/reviews" target="_blank" rel="noopener">Читать все отзывы на Яндекс Картах</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" data-cart-panel aria-hidden="true">
+    <header>
+      <h3>Корзина</h3>
+      <button class="btn" data-cart-toggle>Закрыть</button>
+    </header>
+    <div class="cart-panel__body">
+      <ul class="cart-items" data-cart-items></ul>
+      <div class="cart-summary">
+        
+        <div class="cart-summary__row"><span>Скидка</span><strong data-cart-discount>0 ₽</strong></div>
+        <div class="cart-summary__row"><span>Доставка</span><strong data-cart-delivery>0 ₽</strong></div>
+        <div class="cart-summary__row total"><span>Итого</span><strong data-cart-total>0 ₽</strong></div>
+        <button class="btn btn--black" data-checkout>Продолжить оформление</button>
+      </div>
+    </div>
+  </aside>
+  <div class="cart-backdrop" data-cart-backdrop></div>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <div>
+        <p>© 2025 АланПир</p>
+        <p>ИП Ризванов Рамиль Русланович</p>
+        <p>ИНН 151312781405</p>
+      </div>
+      <div>
+        <p>г. Москва, ул. Тихвинская, 20</p>
+        <p>Будние 8:30–20:00</p>
+        <p>Выходные 10:00–17:00</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/menu.js?v=4"></script>
+  <script src="script.js?v=10"></script>
+</body>
+</html>

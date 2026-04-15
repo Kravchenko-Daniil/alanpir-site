@@ -1,0 +1,32 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Build artefacts
+deploy/
+
+# Databases (dev)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Secrets
+.env
+.env.*
+!.env.example
+secrets-prod
+*.key
+*.pem
+
+# Source archives (распакованы в frontend-next/)
+site-gemini.zip
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

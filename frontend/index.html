@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>АланПир — Осетинские пироги с доставкой</title>
+  <meta name="description" content="АланПир — светлая витрина осетинских пирогов с онлайн-заказом и быстрой доставкой." />
+  <meta name="api-base" content="/api" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__row">
+      <a class="logo" href="index.html"><span>Алан</span>Пир</a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="index.html" class="active">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="reviews.html">Отзывы</a>
+      </nav>
+      <div class="topbar__actions">
+        <a class="phone-link" href="tel:+79263863370">+7 (926) 386-33-70</a>
+        <button class="btn" data-auth-trigger>Личный кабинет</button>
+        <button class="btn btn--black cart-button" data-cart-toggle>
+          <span>Корзина</span>
+          <span data-cart-count>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__layout">
+        <div class="hero__content">
+          <p class="muted">Сервис осетинских пирогов</p>
+          <h1>Тёплый сет от АланПир</h1>
+          <p>Светлый дизайн, лёгкая навигация и всего пара кликов до заказа. Лучшие пироги уже ждут вас ниже.</p>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="catalog.html">Перейти в каталог</a>
+          </div>
+        </div>
+        <div class="hero__image">
+          <span class="hero__badge">Новинка недели</span>
+          <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=60" alt="Пирог" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container banner-row">
+        <article class="banner-card">
+          <h3>Свежие ингредиенты</h3>
+          <p class="muted">Фермерские сыры, зелень и начинка, которую лепим вручную.</p>
+        </article>
+        <article class="banner-card">
+          <h3>Доставка 40–120 мин</h3>
+          <p class="muted">ТТК — 290 ₽, бесплатно от 2 500 ₽.</p>
+        </article>
+        <article class="banner-card">
+          <h3>Оплата как удобно</h3>
+          <p class="muted">ЮKassa, Apple Pay, карты и наличные курьеру.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="best">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="section__title">Лучшие пироги недели</h2>
+            <p class="section__subtitle">Минимум сложностей — максимум вкуса.</p>
+          </div>
+          
+        </div>
+        <div class="best-grid">
+          <article class="best-card">
+            <img src="data/images/пирог-с-мясом-1-scaled.jpg" alt="Осетинский пирог с мясом “Фыдджын”" loading="lazy" />
+            <h4>Осетинский пирог с мясом “Фыдджын”</h4>
+            <p>Говядина, лук, чеснок, острый перец, специи.</p>
+            <div class="best-card__footer">
+              <strong>1 020 ₽</strong>
+              <button class="btn btn--accent" data-featured-add data-product="https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc/">Добавить</button>
+            </div>
+          </article>
+          <article class="best-card">
+            <img src="data/images/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg" alt="Осетинский пирог с сыром и свекольными листьями “Цахараджын”" loading="lazy" />
+            <h4>Пирог с сыром и свекольными листьями</h4>
+            <p>Свекольные листья, сыр, зелень, специи.</p>
+            <div class="best-card__footer">
+              <strong>820 ₽</strong>
+              <button class="btn btn--accent" data-featured-add data-product="https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d1%81%d0%b2%d0%b5%d0%ba%d0%be%d0%bb%d1%8c%d0%bd%d1%8b%d0%bc/">Добавить</button>
+            </div>
+          </article>
+          <article class="best-card">
+            <img src="data/images/пирог-с-сыром-1-1-scaled.jpg" alt="Осетинский пирог с сыром “Уалибах”" loading="lazy" />
+            <h4>Осетинский пирог с сыром “Уалибах”</h4>
+            <p>Сулугуни, адыгейский сыр, сливочное масло.</p>
+            <div class="best-card__footer">
+              <strong>820 ₽</strong>
+              <button class="btn btn--accent" data-featured-add data-product="https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc/">Добавить</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    
+  </main>
+
+  <aside class="cart-panel" data-cart-panel aria-hidden="true">
+    <header>
+      <h3>Корзина</h3>
+      <button class="btn" data-cart-toggle>Закрыть</button>
+    </header>
+    <div class="cart-panel__body">
+      <ul class="cart-items" data-cart-items></ul>
+      <div class="cart-summary">
+        
+        <div class="cart-summary__row"><span>Скидка</span><strong data-cart-discount>0 ₽</strong></div>
+        <div class="cart-summary__row"><span>Доставка</span><strong data-cart-delivery>0 ₽</strong></div>
+        <div class="cart-summary__row total"><span>Итого</span><strong data-cart-total>0 ₽</strong></div>
+        <button class="btn btn--black" data-checkout>Продолжить оформление</button>
+      </div>
+    </div>
+  </aside>
+  <div class="cart-backdrop" data-cart-backdrop></div>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <div>
+        <p>© 2025 АланПир</p>
+        <p>ИП Ризванов Рамиль Русланович</p>
+        <p>ИНН 151312781405</p>
+      </div>
+      <div>
+        <p>г. Москва, ул. Тихвинская, 20</p>
+        <p>Будние 8:30–20:00</p>
+        <p>Выходные 10:00–17:00</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/menu.js?v=4"></script>
+  <script src="script.js?v=10"></script>
+</body>
+</html>

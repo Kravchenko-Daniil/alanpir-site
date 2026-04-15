@@ -1,0 +1,789 @@
+[
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с мясом “Фыдджын”",
+    "composition": "говядина, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1340,
+      "1200 г": 1450
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с сыром и свекольными листьями “Цахараджын”",
+    "composition": "осетинский сыр, свекольные листья, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d1%81%d0%b2%d0%b5%d0%ba%d0%be%d0%bb%d1%8c%d0%bd%d1%8b%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с сыром “Уалибах”",
+    "composition": "осетинский сыр, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-1-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-1-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с зеленым луком и сыром “Кадындзджын”",
+    "composition": "осетинский сыр, зеленый лук, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8b%d0%bc-%d0%bb%d1%83%d0%ba%d0%be%d0%bc-%d0%b8-%d1%81%d1%8b%d1%80/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-2-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с картофелем и сыром “Картофджын”",
+    "composition": "картофель, осетинский сыр, лук, укроп, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b8-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-2-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1090,
+      "1200 г": 1190
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с капустой “Кабускаджын”",
+    "composition": "капуста, грецкий орех, лук, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d0%bf%d1%83%d1%81%d1%82%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 690,
+      "1000 г": 890,
+      "1200 г": 990
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский пирог с тыквой “Насджын”",
+    "composition": "Начинка: тыква, лук (репчатый и красный), специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%82%d1%8b%d0%ba%d0%b2%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-2-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 740,
+      "1000 г": 920,
+      "1200 г": 1050
+    }
+  },
+  {
+    "category_name": "Осетинские",
+    "category_url": "https://nashpir.ru/osetinskie-pirogi/",
+    "title": "Осетинский сладкий пирог с вишней “Балджын”",
+    "composition": "вишня, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b2%d0%b8%d1%88%d0%bd%d0%b5%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1250
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом и зеленью",
+    "composition": "говядина, зелень, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%b8-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8c%d1%8e/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1040,
+      "1000 г": 1340,
+      "1200 г": 1430
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом и грибами",
+    "composition": "говядина, шампиньоны, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%b8-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc%d0%b8/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1380,
+      "1200 г": 1480
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом, помидором и болгарским перцем",
+    "composition": "говядина, помидор, болгарский перец, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%bf%d0%be%d0%bc%d0%b8%d0%b4%d0%be%d1%80%d0%be%d0%bc-%d0%b8-%d0%b1/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1380,
+      "1200 г": 1480
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом “Фыдджын”",
+    "composition": "говядина, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1340,
+      "1200 г": 1450
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом, сыром и болгарским перцем",
+    "composition": "говядина, осетинский сыр, болгарский перец, лук, чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d0%b1%d0%be%d0%bb%d0%b3%d0%b0/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1380,
+      "1200 г": 1480
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом и картофелем",
+    "composition": "говядина, картофель, лук,чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%b8-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1380,
+      "1200 г": 1480
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом и болгарским перцем",
+    "composition": "говядина, болгарский перец, лук,чеснок, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%b8-%d0%b1%d0%be%d0%bb%d0%b3%d0%b0%d1%80%d1%81%d0%ba%d0%b8%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1380,
+      "1200 г": 1490
+    }
+  },
+  {
+    "category_name": "Мясные",
+    "category_url": "https://nashpir.ru/meat-pirog/",
+    "title": "Осетинский пирог с мясом и капустой",
+    "composition": "говядина, капуста",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d1%8f%d1%81%d0%be%d0%bc-%d0%b8-%d0%ba%d0%b0%d0%bf%d1%83%d1%81%d1%82%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-мясом-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-мясом-1-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1290,
+      "1200 г": 1390
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с сыром и свекольными листьями “Цахараджын”",
+    "composition": "осетинский сыр, свекольные листья, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d1%81%d0%b2%d0%b5%d0%ba%d0%be%d0%bb%d1%8c%d0%bd%d1%8b%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с сыром “Уалибах”",
+    "composition": "осетинский сыр, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-1-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-1-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с сыром и зеленью",
+    "composition": "осетинский сыр, укроп, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8c%d1%8e/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с сыром и шпинатом",
+    "composition": "осетинский сыр, шпинат, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d1%88%d0%bf%d0%b8%d0%bd%d0%b0%d1%82%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-со-свекольными-листьями-и-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с сыром и грибами",
+    "composition": "осетинский сыр, грибы, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc%d0%b8/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-1-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Сырные",
+    "category_url": "https://nashpir.ru/chise/",
+    "title": "Осетинский пирог с зеленым луком и сыром “Кадындзджын”",
+    "composition": "осетинский сыр, зеленый лук, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8b%d0%bc-%d0%bb%d1%83%d0%ba%d0%be%d0%bc-%d0%b8-%d1%81%d1%8b%d1%80/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-2-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1240,
+      "1200 г": 1350
+    }
+  },
+  {
+    "category_name": "Куриные",
+    "category_url": "https://nashpir.ru/chiken/",
+    "title": "Осетинский пирог с курицей и сыром",
+    "composition": "курица, осетинский сыр, помидор, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d1%83%d1%80%d0%b8%d1%86%d0%b5%d0%b9-%d0%b8-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-1-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 920,
+      "1000 г": 1290,
+      "1200 г": 1420
+    }
+  },
+  {
+    "category_name": "Куриные",
+    "category_url": "https://nashpir.ru/chiken/",
+    "title": "Осетинский пирог с курицей, грибами и сыром",
+    "composition": "курица, шампиньоны, осетинский сыр, помидор, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d1%83%d1%80%d0%b8%d1%86%d0%b5%d0%b9-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc%d0%b8-%d0%b8-%d1%81/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-1-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 920,
+      "1000 г": 1320,
+      "1200 г": 1420
+    }
+  },
+  {
+    "category_name": "Куриные",
+    "category_url": "https://nashpir.ru/chiken/",
+    "title": "Осетинский пирог с курицей, грибами, сыром и болгарским перцем",
+    "composition": "курица, шампиньоны, осетинский сыр, помидор, болгарский перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d1%83%d1%80%d0%b8%d1%86%d0%b5%d0%b9-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc%d0%b8-%d1%81%d1%8b%d1%80%d0%be%d0%bc-%d0%b8-%d0%b1%d0%be%d0%bb%d0%b3%d0%b0%d1%80/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-1-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 920,
+      "1000 г": 1320,
+      "1200 г": 1420
+    }
+  },
+  {
+    "category_name": "Картофельные",
+    "category_url": "https://nashpir.ru/potato/",
+    "title": "Осетинский пирог с картофелем, зеленью и сыром",
+    "composition": "картофель, осетинский сыр, лук, укроп, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8c/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 780,
+      "1000 г": 1090,
+      "1200 г": 1190
+    }
+  },
+  {
+    "category_name": "Картофельные",
+    "category_url": "https://nashpir.ru/potato/",
+    "title": "Осетинский пирог с картофелем и сыром “Картофджын”",
+    "composition": "картофель, осетинский сыр, лук, укроп, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b8-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-2-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 820,
+      "1000 г": 1090,
+      "1200 г": 1190
+    }
+  },
+  {
+    "category_name": "Картофельные",
+    "category_url": "https://nashpir.ru/potato/",
+    "title": "Осетинский пирог с картофелем, грибами и сыром",
+    "composition": "картофель, шампиньоны, осетинский сыр, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 850,
+      "1000 г": 1090,
+      "1200 г": 1190
+    }
+  },
+  {
+    "category_name": "Картофельные",
+    "category_url": "https://nashpir.ru/potato/",
+    "title": "Осетинский пирог с картофелем и грибами",
+    "composition": "картофель, шампиньоны, специи",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b3%d1%80%d0%b8%d0%b1%d0%b0%d0%bc%d0%b8/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "600 г": 750,
+      "1000 г": 890,
+      "1200 г": 990
+    }
+  },
+  {
+    "category_name": "Картофельные",
+    "category_url": "https://nashpir.ru/potato/",
+    "title": "Осетинский пирог с картофелем и зеленью",
+    "composition": "картофель, лук, укроп, острый перец, специи",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%b0%d1%80%d1%82%d0%be%d1%84%d0%b5%d0%bb%d0%b5%d0%bc-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd%d1%8c%d1%8e/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-сыром-1-scaled.jpg",
+    "image_local_path": "images/пирог-с-сыром-1-scaled.jpg",
+    "grams_prices": {
+      "600 г": 750,
+      "1000 г": 890,
+      "1200 г": 990
+    }
+  },
+  {
+    "category_name": "Рыбные",
+    "category_url": "https://nashpir.ru/fish/",
+    "title": "Осетинский пирог с семгой и шпинатом",
+    "composition": "семга, шпинат, лук, специи",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d0%b5%d0%bc%d0%b3%d0%be%d0%b9-%d0%b8-%d1%88%d0%bf%d0%b8%d0%bd%d0%b0%d1%82%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1740,
+      "1000 г": 2090,
+      "1200 г": 2320
+    }
+  },
+  {
+    "category_name": "Рыбные",
+    "category_url": "https://nashpir.ru/fish/",
+    "title": "Осетинский пирог с семгой и сыром",
+    "composition": "семга, осетинский сыр, укроп, лук, специи",
+    "product_url": "https://nashpir.ru/product/%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d0%b5%d0%bc%d0%b3%d0%be%d0%b9-%d0%b8-%d1%81%d1%8b%d1%80%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1740,
+      "1000 г": 2090,
+      "1200 г": 2320
+    }
+  },
+  {
+    "category_name": "Рыбные",
+    "category_url": "https://nashpir.ru/fish/",
+    "title": "Осетинский пирог с семгой",
+    "composition": "семга, укроп, лук, специи",
+    "product_url": "https://nashpir.ru/product/%d0%be%d1%81%d0%b5%d1%82%d0%b8%d0%bd%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%81%d0%b5%d0%bc%d0%b3%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-курица-сыр-2-scaled.jpg",
+    "image_local_path": "images/пирог-курица-сыр-2-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1740,
+      "1000 г": 2090,
+      "1200 г": 2320
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с черникой и смородиной",
+    "composition": "черника, смородина, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%87%d0%b5%d1%80%d0%bd%d0%b8%d0%ba%d0%be%d0%b9-%d0%b8-%d1%81%d0%bc%d0%be%d1%80%d0%be%d0%b4%d0%b8%d0%bd%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1290
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с голубикой",
+    "composition": "голубика, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b3%d0%be%d0%bb%d1%83%d0%b1%d0%b8%d0%ba%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1190
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Осетинский сладкий пирог с вишней “Балджын”",
+    "composition": "вишня, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b2%d0%b8%d1%88%d0%bd%d0%b5%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1250
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с яблоком",
+    "composition": "яблоки, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%8f%d0%b1%d0%bb%d0%be%d0%ba%d0%be%d0%bc/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 820,
+      "1000 г": 1050
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с малиной",
+    "composition": "малина, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%bc%d0%b0%d0%bb%d0%b8%d0%bd%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1050,
+      "1000 г": 1290
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с ежевикой и малиной",
+    "composition": "ежевика, малина, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b5%d0%b6%d0%b5%d0%b2%d0%b8%d0%ba%d0%be%d0%b9-%d0%b8-%d0%bc%d0%b0%d0%bb%d0%b8%d0%bd%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 1020,
+      "1000 г": 1290
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с яблоком и ежевикой",
+    "composition": "яблоко, ежевика, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%8f%d0%b1%d0%bb%d0%be%d0%ba%d0%be%d0%bc-%d0%b8-%d0%b5%d0%b6%d0%b5%d0%b2%d0%b8%d0%ba%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1190
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с яблоком и малиной",
+    "composition": "яблоко, малина, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%8f%d0%b1%d0%bb%d0%be%d0%ba%d0%be%d0%bc-%d0%b8-%d0%bc%d0%b0%d0%bb%d0%b8%d0%bd%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1190
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с яблоком и вишней",
+    "composition": "яблоко, вишня, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%8f%d0%b1%d0%bb%d0%be%d0%ba%d0%be%d0%bc-%d0%b8-%d0%b2%d0%b8%d1%88%d0%bd%d0%b5%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 950,
+      "1000 г": 1190
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с клубникой",
+    "composition": "клубника, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%ba%d0%bb%d1%83%d0%b1%d0%bd%d0%b8%d0%ba%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 930,
+      "1000 г": 1190
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с ежевикой",
+    "composition": "ежевика, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d0%b5%d0%b6%d0%b5%d0%b2%d0%b8%d0%ba%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1290
+    }
+  },
+  {
+    "category_name": "Сладкие пироги",
+    "category_url": "https://nashpir.ru/sladkie-pirogi/",
+    "title": "Сладкий пирог с черной смородиной",
+    "composition": "черника, сахарная пудра",
+    "product_url": "https://nashpir.ru/product/%d1%81%d0%bb%d0%b0%d0%b4%d0%ba%d0%b8%d0%b9-%d0%bf%d0%b8%d1%80%d0%be%d0%b3-%d1%81-%d1%87%d0%b5%d1%80%d0%bd%d0%b8%d0%ba%d0%be%d0%b9/",
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/пирог-с-вишней-scaled.jpg",
+    "image_local_path": "images/пирог-с-вишней-scaled.jpg",
+    "grams_prices": {
+      "700 г": 990,
+      "1000 г": 1290
+    }
+  },
+  {
+    "category_name": "Сеты",
+    "category_url": "https://nashpir.ru/set/",
+    "title": "Сет “НАШ ПИР” 10кг ( на компанию из 20-22 человека)",
+    "composition": "Сет из осетинских пирогов: Пирог с мясом “Фыдджын” 1кг Пирог с сыром \"Уалибах\" 1кг Пирог с мясом и картофелем 1кг Пирог с мясом, помидором и болгарским перцем 1кг Пирог с курицей и сыром 1кг Пирог с курицей грибами и сыром 1кг Пирог с семгой 1кг Пирог с сыром и зеленью 1кг Пирог картофелем и сыром 1кг Пирог с вишней 1кг",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/нашпир1-300x225.webp",
+    "image_local_path": "images/нашпир1-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Сеты",
+    "category_url": "https://nashpir.ru/set/",
+    "title": "Сет “Ассорти” 7кг.( на компанию из 14-16человек)",
+    "composition": "Сет осетинских пирогов: Пирог с мясом \"Фыдджын\" 1кг Осетинский пирог картофелем и сыром \"Картофджын\"1кг Пирог с курицей и сыром 1кг Пирог с семгой 1кг Пирог с мясом и болгарским перцем 1кг Пирог с сыром и шпинатом 1кг Пирог с клубникой 1кг",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/7-300x225.webp",
+    "image_local_path": "images/7-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Сеты",
+    "category_url": "https://nashpir.ru/set/",
+    "title": "Сет “Выгодный” 1.8кг ( на компанию из 3-5человек)",
+    "composition": "Сет из небольших осетинских пирогов Пирог с мясом \"Фыдджын\" 600г Пирог с курицей и сыром 600г Пирог с картофелем и сыром \"Картофджын\" 600г",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/выгодный-300x225.webp",
+    "image_local_path": "images/выгодный-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Сеты",
+    "category_url": "https://nashpir.ru/set/",
+    "title": "Сет “Тройка” 3кг (на компанию из 6-8человек)",
+    "composition": "Сет из осетинских пирогов: Пирог с мясом 1кг Пирог с сыром 1кг Пирог с сыром и свекольными листьями 1кг",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/3-300x225.webp",
+    "image_local_path": "images/3-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Сеты",
+    "category_url": "https://nashpir.ru/set/",
+    "title": "Сет “Офисный” 5кг (на компанию из 10-12человек)",
+    "composition": "Сет осетинских пирогов: Пирог с мясом 1кг Пирог с курицей и сыром 1кг Пирог с сыром 1кг Пирог с сыром и шпинатом 1кг Пирог с картофелем и сыром 1кг",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/5-300x225.webp",
+    "image_local_path": "images/5-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Осетинский соус Нартов",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/нартов-300x225.jpg",
+    "image_local_path": "images/нартов-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Соус Сметана",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/сметана-300x225.jpg",
+    "image_local_path": "images/сметана-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Соус Кетчуп",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/кетчуп-300x225.jpg",
+    "image_local_path": "images/кетчуп-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Соус Чесночный",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/чесночный-300x225.jpg",
+    "image_local_path": "images/чесночный-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Осетинский соус Цахтон",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/цахтон-300x225.jpg",
+    "image_local_path": "images/цахтон-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Соус Ткемали",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/ткемали-300x225.jpg",
+    "image_local_path": "images/ткемали-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Соусы",
+    "category_url": "https://nashpir.ru/sous/",
+    "title": "Соус Сырный",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/12/сырный-300x225.jpg",
+    "image_local_path": "images/сырный-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Напитки",
+    "category_url": "https://nashpir.ru/drinks/",
+    "title": "Фруктово-ягодный компот(0.5л)",
+    "composition": "Малина, вишня, яблоко",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/компот-scaled-300x225.webp",
+    "image_local_path": "images/компот-scaled-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Напитки",
+    "category_url": "https://nashpir.ru/drinks/",
+    "title": "Компот Ягодный(1л)",
+    "composition": "Клубника, малина,вишня, смородина, яблоко",
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/компот-300x225.jpg",
+    "image_local_path": "images/компот-300x225.jpg",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Напитки",
+    "category_url": "https://nashpir.ru/drinks/",
+    "title": "Rich яблоко",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/3-1-300x225.webp",
+    "image_local_path": "images/3-1-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Напитки",
+    "category_url": "https://nashpir.ru/drinks/",
+    "title": "Rich вишня",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/2-300x225.webp",
+    "image_local_path": "images/2-300x225.webp",
+    "grams_prices": {}
+  },
+  {
+    "category_name": "Напитки",
+    "category_url": "https://nashpir.ru/drinks/",
+    "title": "Rich апельсин",
+    "composition": null,
+    "product_url": null,
+    "image_url": "https://nashpir.ru/wp-content/uploads/2024/11/1-300x225.webp",
+    "image_local_path": "images/1-300x225.webp",
+    "grams_prices": {}
+  }
+]

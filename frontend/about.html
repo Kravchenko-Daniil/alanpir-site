@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>О нас — АланПир</title>
+  <meta name="description" content="О пекарне АланПир: традиционные осетинские пироги, свежесть и доставка по Москве." />
+  <meta name="api-base" content="/api" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <style>
+    .about-text { white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__row">
+      <a class="logo" href="index.html"><span>Алан</span>Пир</a>
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html" class="active">О нас</a>
+        <a href="reviews.html">Отзывы</a>
+      </nav>
+      <div class="topbar__actions">
+        <a class="phone-link" href="tel:+79263863370">+7 (926) 386-33-70</a>
+        <button class="btn" data-auth-trigger>Личный кабинет</button>
+        <button class="btn btn--black cart-button" data-cart-toggle>
+          <span>Корзина</span>
+          <span data-cart-count>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__card">
+          <p class="muted">О компании</p>
+          <h1>О пекарне «АланПир»</h1>
+          <div class="about-text">
+«АланПир» — это место, где осетинские пироги становятся настоящим искусством.
+Мы готовим по традиционным рецептам, вручную, используя только свежие и натуральные продукты. В каждый пирог мы вкладываем то, что невозможно купить — любовь к делу и уважение к гостям.
+
+Почему выбирают нас:
+
+Аутентичные осетинские рецепты.
+
+Только натуральные продукты и качественные ингредиенты.
+
+Пироги выпекаем перед самой доставкой — чтобы вы получили их горячими и свежими.
+
+Быстрая доставка по Москве домой или в офис.
+
+Вкус, который невозможно забыть.
+
+Пекарня «АланПир» — это место, где традиции встречаются с сервисом современного уровня.
+Попробуйте — и вы поймёте, почему наши пироги называют лучшими в Москве.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container best-grid">
+        <article class="best-card">
+          <img src="data/images/best_meet.jpg" alt="Лучшее мясо для пирогов" loading="lazy" />
+          <h4>Лучшее мясо</h4>
+          <p class="muted">Отбираем фермерское мясо — сочная начинка и насыщенный вкус.</p>
+        </article>
+        <article class="best-card">
+          <img src="data/images/cheese.jpg" alt="Натуральные сыры" loading="lazy" />
+          <h4>Натуральные сыры</h4>
+          <p class="muted">Осетинские сыры для идеальной тянущейся начинки.</p>
+        </article>
+        <article class="best-card">
+          <img src="data/images/povars.jpeg" alt="Наши пекари" loading="lazy" />
+          <h4>Наши пекари</h4>
+          <p class="muted">Лепим вручную и печём перед доставкой — как для себя.</p>
+        </article>
+        <article class="best-card">
+          <img src="data/images/best_muka.jpg" alt="Отборная мука" loading="lazy" />
+          <h4>Отборная мука</h4>
+          <p class="muted">Тонкое тесто и правильная структура благодаря качественной муке.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <aside class="cart-panel" data-cart-panel aria-hidden="true">
+    <header>
+      <h3>Корзина</h3>
+      <button class="btn" data-cart-toggle>Закрыть</button>
+    </header>
+    <div class="cart-panel__body">
+      <ul class="cart-items" data-cart-items></ul>
+      <div class="cart-summary">
+        
+        <div class="cart-summary__row"><span>Скидка</span><strong data-cart-discount>0 ₽</strong></div>
+        <div class="cart-summary__row"><span>Доставка</span><strong data-cart-delivery>0 ₽</strong></div>
+        <div class="cart-summary__row total"><span>Итого</span><strong data-cart-total>0 ₽</strong></div>
+        <button class="btn btn--black" data-checkout>Продолжить оформление</button>
+      </div>
+    </div>
+  </aside>
+  <div class="cart-backdrop" data-cart-backdrop></div>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <div>
+        <p>© 2025 АланПир</p>
+        <p>ИП Ризванов Рамиль Русланович</p>
+        <p>ИНН 151312781405</p>
+      </div>
+      <div>
+        <p>г. Москва, ул. Тихвинская, 20</p>
+        <p>Будние 8:30–20:00</p>
+        <p>Выходные 10:00–17:00</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/menu.js?v=4"></script>
+  <script src="script.js?v=10"></script>
+</body>
+</html>
