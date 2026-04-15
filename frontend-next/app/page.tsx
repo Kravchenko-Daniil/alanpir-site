@@ -2,6 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ProductCard from '@/components/ProductCard';
 import { Check, Star, Flame, Gift, Truck, UtensilsCrossed, Sparkles } from 'lucide-react';
+import { MENU } from '@/lib/menu';
+
+const HITS = MENU.filter((p) => p.badge === 'hit' || p.badge === 'new').slice(0, 3);
+const FEATURED = HITS.length >= 3 ? HITS : MENU.slice(0, 3);
 
 export default function Home() {
   return (
@@ -76,26 +80,9 @@ export default function Home() {
       <section className="mb-16">
         <h2 className="text-3xl mb-6 text-ink font-serif">Популярно сейчас</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <ProductCard 
-            title="Фыдджын (мясной)"
-            weight="1000 г • Тонкое тесто"
-            price={1290}
-            imageEmoji="🥩"
-            badge={{ text: 'Хит', type: 'hit' }}
-          />
-          <ProductCard 
-            title="Цахараджын"
-            weight="1000 г • Сыр и листья свеклы"
-            price={1120}
-            imageEmoji="🍃"
-          />
-          <ProductCard 
-            title="Пирог с сёмгой"
-            weight="700 г • Шпинат и рыба"
-            price={1740}
-            imageEmoji="🐟"
-            badge={{ text: 'Новинка', type: 'new' }}
-          />
+          {FEATURED.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
         </div>
       </section>
 

@@ -1,17 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
-
-export interface Product {
-  id: string;
-  title: string;
-  weight: string;
-  price: number;
-  imageEmoji?: string;
-  imageUrl?: string;
-  badge?: { text: string; type: 'hit' | 'new' };
-  isVegan?: boolean;
-}
+import type { Product } from '@/lib/menu';
 
 interface ProductModalContextType {
   isOpen: boolean;
@@ -33,7 +23,7 @@ export function ProductModalProvider({ children }: { children: ReactNode }) {
 
   const closeModal = () => {
     setIsOpen(false);
-    setTimeout(() => setProduct(null), 300); // wait for animation
+    setTimeout(() => setProduct(null), 300);
   };
 
   return (
