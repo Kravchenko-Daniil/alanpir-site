@@ -8,6 +8,8 @@ node_modules/
 
 # Build artefacts
 deploy/
+.next/
+out/
 
 # Databases (dev)
 *.sqlite

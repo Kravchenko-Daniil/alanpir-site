@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-terracotta: #C04D29;
+  --color-bg-warm: #FAF9F6;
+  --color-ink: #1D1D1B;
+  --color-muted: #6B6B6B;
+  --color-surface: #FFFFFF;
+  --color-border-warm: #E5E1DA;
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+body {
+  background-color: var(--color-bg-warm);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Base typography overrides */
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+}
