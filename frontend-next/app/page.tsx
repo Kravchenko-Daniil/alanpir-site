@@ -9,14 +9,22 @@ const FEATURED_MEAT = MENU.filter((p) => p.categorySlug === 'meat').slice(0, 4);
 const FEATURED_SWEET = MENU.filter((p) => p.categorySlug === 'sweet').slice(0, 4);
 
 function BannerSlot() {
-  // Временная заглушка. Заменится на баннер от клиента.
   return (
-    <div className="relative w-full aspect-[16/6] sm:aspect-[16/5] rounded-2xl overflow-hidden bg-accent flex items-center justify-center">
-      <div className="text-center px-6">
-        <div className="text-xs uppercase font-bold text-ink/60 tracking-wider mb-2">Место под баннер</div>
-        <div className="text-sm md:text-base text-ink/80">
-          Здесь будет главное предложение месяца
-        </div>
+    <div className="relative w-full aspect-[16/6] sm:aspect-[16/5] rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a0d] to-[#3a1f0a] flex items-center px-6 sm:px-10">
+      <div className="max-w-[60%]">
+        <div className="inline-block bg-accent text-ink text-xs font-bold uppercase px-3 py-1 rounded mb-3">Акция</div>
+        <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl text-white font-bold leading-tight mb-3">
+          Просто. Сочно.<br/><span className="text-accent">С дымком.</span>
+        </h2>
+        <p className="text-white/70 text-xs sm:text-sm mb-4 max-w-[320px]">
+          Новый пирог «Гриль Тейсти» — мясо на углях в традиционном тесте
+        </p>
+        <Link href="/catalog" className="inline-block bg-accent text-ink px-5 py-2.5 rounded-full text-sm font-bold hover:bg-accent-dark transition-colors">
+          Попробовать
+        </Link>
+      </div>
+      <div className="absolute right-0 top-0 h-full w-[45%] flex items-center justify-center">
+        <div className="w-[80%] h-[80%] rounded-full bg-gradient-radial from-amber-700 to-transparent opacity-60" />
       </div>
     </div>
   );
@@ -48,10 +56,10 @@ export default function Home() {
 
       <section className="mb-10 md:mb-14 text-center">
         <h1 className="text-3xl md:text-5xl font-serif font-bold text-ink leading-tight mb-2">
-          Осетинские пироги АланПир
+          Доставка осетинских пирогов<br/>по всей Москве
         </h1>
         <p className="text-sm md:text-base text-muted">
-          Традиционные рецепты, ручная лепка, доставка по Москве
+          *за 40–120 минут в зависимости от района
         </p>
       </section>
 
