@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import MobileTabBar from '@/components/MobileTabBar';
 import { ToastProvider } from '@/hooks/useToast';
 import { CartProvider } from '@/hooks/useCart';
 import { AuthModalProvider } from '@/hooks/useAuthModal';
@@ -36,10 +37,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AuthModalProvider>
               <ProductModalProvider>
                 <Header />
-                <main className="flex-1 w-full max-w-[940px] mx-auto px-4 sm:px-6 lg:px-8">
+                <main className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                   {children}
                 </main>
                 <Footer />
+                <MobileTabBar />
                 <Toast />
                 <CartDrawer />
                 <AuthModal />

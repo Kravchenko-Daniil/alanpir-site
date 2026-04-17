@@ -1,24 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-terracotta: #C04D29;
-  --color-bg-warm: #FAF9F6;
-  --color-ink: #1D1D1B;
-  --color-muted: #6B6B6B;
-  --color-surface: #FFFFFF;
-  --color-border-warm: #E5E1DA;
-  
+  /* Акценты */
+  --color-accent: #F2C94C;        /* жёлтый фон шапки/кнопок-акций */
+  --color-accent-dark: #E0B53D;   /* hover жёлтого */
+  --color-action: #111111;        /* чёрный — основные CTA */
+  --color-action-hover: #333333;
+  --color-danger: #E0433A;        /* красный для важных CTA, типа «Добавить» */
+
+  /* База */
+  --color-bg: #FFFFFF;            /* белый фон контента */
+  --color-bg-warm: #FAF9F6;       /* тёплый off-white для альтернативного фона */
+  --color-ink: #111111;           /* основной текст */
+  --color-muted: #6B6B6B;         /* второстепенный */
+  --color-surface: #FFFFFF;       /* карточки */
+  --color-border-warm: #EAEAEA;   /* бордеры */
+
+  /* Legacy-алиас на время миграции — чтобы не сломать все места разом */
+  --color-terracotta: #E0433A;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 }
 
 body {
-  background-color: var(--color-bg-warm);
+  background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
 
-/* Base typography overrides */
 h1, h2, h3, .font-serif {
   font-family: var(--font-serif);
 }
+
+/* Hide scrollbar for horizontal tab strips */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
