@@ -13,10 +13,10 @@ export default function Footer() {
                 АЛАНПИР
               </span>
             </Link>
-            <a href="tel:+79263863370" className="text-xl md:text-2xl font-bold hover:text-accent transition-colors">+7 (926) 386-33-70</a>
-            <a href="https://wa.me/79263863370" className="text-white/70 hover:text-accent transition-colors font-medium">Написать в WhatsApp</a>
+            <a href="tel:+79264990099" className="text-xl md:text-2xl font-bold hover:text-accent transition-colors">+7 (926) 499-00-99</a>
+            <a href="https://wa.me/79264990099" className="text-white/70 hover:text-accent transition-colors font-medium">Написать в WhatsApp</a>
             <a href="mailto:rizvanovibragim@yandex.ru" className="text-white/70 hover:text-accent transition-colors">rizvanovibragim@yandex.ru</a>
-            <span className="text-white/70 mt-1 md:mt-2">Москва, Тихвинская 20</span>
+            <span className="text-white/70 mt-1 md:mt-2">Москва, Трифоновская 4</span>
           </div>
 
           {/* Column 2: Working Hours */}
@@ -36,8 +36,8 @@ export default function Footer() {
             <Link href="/about" className="text-white/70 hover:text-accent transition-colors">О нас</Link>
             <Link href="/reviews" className="text-white/70 hover:text-accent transition-colors">Отзывы</Link>
             <Link href="/account" className="text-white/70 hover:text-accent transition-colors">Личный кабинет</Link>
-            <Link href="#" className="text-white/70 hover:text-accent transition-colors mt-2 md:mt-3 border-t border-white/10 pt-3 md:pt-4">Политика конфиденциальности</Link>
-            <Link href="#" className="text-white/70 hover:text-accent transition-colors">Публичная оферта</Link>
+            <Link href="/privacy/" className="text-white/70 hover:text-accent transition-colors mt-2 md:mt-3 border-t border-white/10 pt-3 md:pt-4">Политика конфиденциальности</Link>
+            <Link href="/offer/" className="text-white/70 hover:text-accent transition-colors">Публичная оферта</Link>
           </div>
 
           {/* Column 4: Requisites */}

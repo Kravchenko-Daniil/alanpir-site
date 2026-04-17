@@ -11,7 +11,7 @@ type Field = 'name' | 'phone' | 'email';
 
 export default function ContactFields({ isAuth }: ContactFieldsProps) {
   const [name, setName] = useState(isAuth ? 'Ибрагим' : '');
-  const [phone, setPhone] = useState(isAuth ? '+7 (926) 386-33-70' : '');
+  const [phone, setPhone] = useState(isAuth ? '+7 (926) 499-00-99' : '');
   const [email, setEmail] = useState('');
   const [touched, setTouched] = useState<Record<Field, boolean>>({ name: false, phone: false, email: false });
 

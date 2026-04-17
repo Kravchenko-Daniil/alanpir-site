@@ -129,7 +129,7 @@ function OrderContent() {
       </div>
 
       <div className="text-sm text-muted">
-        Случилось что-то не так? Звоните <a href="tel:+79263863370" className="text-ink font-medium hover:underline">+7 (926) 386-33-70</a> или пишите в <a href="https://wa.me/79263863370" className="text-ink font-medium hover:underline">WhatsApp</a>
+        Случилось что-то не так? Звоните <a href="tel:+79264990099" className="text-ink font-medium hover:underline">+7 (926) 499-00-99</a> или пишите в <a href="https://wa.me/79264990099" className="text-ink font-medium hover:underline">WhatsApp</a>
       </div>
     </div>
   );

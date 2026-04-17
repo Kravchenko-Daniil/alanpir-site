@@ -206,16 +206,16 @@ export default function CheckoutPage() {
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Пункт выдачи</h3>
                     <div className="border border-border-warm rounded-xl overflow-hidden">
                       <div className="p-4 bg-surface">
-                        <div className="font-medium text-ink text-sm mb-1">Москва, ул. Тихвинская, 20</div>
+                        <div className="font-medium text-ink text-sm mb-1">Москва, ул. Трифоновская, 4</div>
                         <div className="text-xs text-muted">Ежедневно с 08:30 до 19:00</div>
                       </div>
                       <iframe
-                        src="https://yandex.ru/map-widget/v1/?ll=37.5876%2C55.7879&mode=search&oid=1111111111&ol=biz&z=16&text=%D1%83%D0%BB.%20%D0%A2%D0%B8%D1%85%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C%2020%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"
+                        src="https://yandex.ru/map-widget/v1/?ll=37.6229%2C55.7925&mode=search&oid=1111111111&ol=biz&z=16&text=%D1%83%D0%BB.%20%D0%A2%D1%80%D0%B8%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%204%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"
                         width="100%"
                         height="240"
                         frameBorder="0"
                         allowFullScreen
-                        title="Карта: АланПир, Тихвинская 20"
+                        title="Карта: АланПир, Трифоновская 4"
                         className="block"
                       />
                     </div>

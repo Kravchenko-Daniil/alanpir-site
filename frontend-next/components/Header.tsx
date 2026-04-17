@@ -38,9 +38,9 @@ export default function Header() {
                 </span>
               </Link>
               {/* Mobile Phone (visible only < sm) */}
-              <a href="tel:+79263863370" className="sm:hidden flex items-center gap-1.5 text-[13px] font-bold text-ink hover:text-accent transition-colors mt-1">
+              <a href="tel:+79264990099" className="sm:hidden flex items-center gap-1.5 text-[13px] font-bold text-ink hover:text-accent transition-colors mt-1">
                 <PhoneCall className="w-3.5 h-3.5 text-accent" />
-                <span>+7 926 386-33-70</span>
+                <span>+7 (926) 499-00-99</span>
               </a>
             </div>
             
@@ -70,11 +70,11 @@ export default function Header() {
           <div className="flex items-center gap-2 sm:gap-4 md:gap-5 shrink-0">
             
             {/* Desktop/Tablet Phone */}
-            <a href="tel:+79263863370" className="hidden sm:flex flex-col items-end justify-center mr-1 md:mr-2 group">
+            <a href="tel:+79264990099" className="hidden sm:flex flex-col items-end justify-center mr-1 md:mr-2 group">
               <span className="flex items-center gap-1.5 text-ink group-hover:text-accent transition-colors">
                 <PhoneCall className="w-4 h-4 md:w-5 md:h-5 text-accent" />
                 <span className="font-sans font-bold text-sm md:text-base lg:text-lg xl:text-xl tracking-tight whitespace-nowrap">
-                  +7 (926) 386-33-70
+                  +7 (926) 499-00-99
                 </span>
               </span>
               <span className="hidden xl:block text-[10px] text-muted font-medium mt-0.5 whitespace-nowrap">
@@ -134,9 +134,9 @@ export default function Header() {
             </nav>
 
             <div className="mt-auto pt-8 border-t border-border-warm flex flex-col gap-4">
-              <a href="tel:+79263863370" className="flex items-center gap-3 text-ink hover:text-accent transition-colors font-bold text-xl">
+              <a href="tel:+79264990099" className="flex items-center gap-3 text-ink hover:text-accent transition-colors font-bold text-xl">
                 <PhoneCall className="w-6 h-6 text-accent" />
-                +7 (926) 386-33-70
+                +7 (926) 499-00-99
               </a>
               <div className="flex flex-col gap-1 text-xs text-muted font-medium">
                 <span>Приём заказов:</span>

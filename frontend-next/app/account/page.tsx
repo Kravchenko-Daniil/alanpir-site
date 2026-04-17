@@ -41,7 +41,7 @@ export default function AccountPage() {
             ИР
           </div>
           <h2 className="text-xl font-bold text-ink mb-1">Ибрагим Ризванов</h2>
-          <p className="text-sm text-muted mb-1">+7 (926) 386-33-70</p>
+          <p className="text-sm text-muted mb-1">+7 (926) 499-00-99</p>
           <p className="text-sm text-muted mb-8">rizvanovibragim@yandex.ru</p>
           
           <button 
@@ -144,7 +144,7 @@ export default function AccountPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Телефон</label>
-                  <input type="tel" defaultValue="+7 (926) 386-33-70" className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors" />
+                  <input type="tel" defaultValue="+7 (926) 499-00-99" className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Email</label>

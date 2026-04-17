@@ -6,17 +6,17 @@ export const SITE_URL = 'https://alanpir.ru';
 export const YANDEX_METRIKA_ID: string | null = null; // например: '98765432'
 export const GOOGLE_ANALYTICS_ID: string | null = null; // например: 'G-XXXXXXXXXX'
 export const SITE_NAME = 'АланПир';
-export const SITE_PHONE = '+7 (926) 386-33-70';
-export const SITE_PHONE_RAW = '+79263863370';
+export const SITE_PHONE = '+7 (926) 499-00-99';
+export const SITE_PHONE_RAW = '+79264990099';
 export const SITE_EMAIL = 'rizvanovibragim@yandex.ru';
 export const SITE_ADDRESS = {
-  street: 'ул. Тихвинская, 20',
+  street: 'ул. Трифоновская, 4',
   city: 'Москва',
   region: 'Москва',
-  postalCode: '127055',
+  postalCode: '129090',
   country: 'RU',
 };
-export const SITE_GEO = { lat: 55.7879, lon: 37.5876 };
+export const SITE_GEO = { lat: 55.7925, lon: 37.6229 };
 
 export const DEFAULT_TITLE = 'АланПир — Осетинские пироги с доставкой по Москве';
 export const DEFAULT_DESCRIPTION =
