@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AuthModalProvider>
               <ProductModalProvider>
                 <Header />
-                <main className="flex-1 w-full max-w-[940px] mx-auto px-4 sm:px-6 lg:px-8">
+                <main className="flex-1 w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                   {children}
                 </main>
                 <Footer />

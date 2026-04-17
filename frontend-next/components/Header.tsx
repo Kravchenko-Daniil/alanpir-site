@@ -18,7 +18,7 @@ export default function Header() {
 
   return (
     <header className="h-20 border-b border-border-warm bg-bg-warm sticky top-0 z-40">
-      <div className="w-full max-w-[940px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button className="md:hidden text-ink">
             <Menu className="w-6 h-6" />
