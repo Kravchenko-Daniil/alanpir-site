@@ -1,37 +1,45 @@
-# АланПир — сайт ресторана осетинских пирогов
+<div align="center">
 
-Статический фронтенд + Node.js API. Прод: [alanpir.ru](https://alanpir.ru).
+# 🥟 alanpir-site
 
-## Структура
+### Сайт ресторана осетинских пирогов «АланПир»
 
-- `frontend/` — статический сайт (HTML, CSS, JS, картинки, меню)
-- `backend/` — Node.js API (Express + SQLite + DaData + nodemailer)
-- `scripts/prepare-deploy.mjs` — сборщик артефактов деплоя
-- `docs/` — ТЗ, контент, инструкция по деплою, скриншоты
-- `archive/` — неиспользуемый код на сохранение
+`Node.js` · `Express` · `SQLite` · `DaData` · `Next.js`  ·  🟢 [alanpir.ru](https://alanpir.ru)
 
-## Локально
+</div>
+
+---
+
+## 🌱 Что это
+
+Фулстек-сайт ресторана «АланПир», где можно полистать меню осетинских и сладких пирогов, напитков, и оформить заказ с доставкой по Москве. Работает в проде: [alanpir.ru](https://alanpir.ru).
+
+Это мой первый коммерческий end-to-end проект: от ТЗ и дизайна до развёрнутого на VPS бэкенда и фронта, который обслуживает реальные заказы.
+
+## ⚡ Что умеет
+
+- Каталог пирогов с фото, описанием, ценами
+- Корзина, оформление заказа с адресом (подсказки адресов через DaData)
+- Аккаунт клиента, история заказов
+- Оплата, уведомления, отправка чека на email
+- Админская часть для управления меню и заказами
+
+## 🔧 Под капотом
+
+- **Фронт (prod):** статический HTML/CSS/JS, лежит на ISPmanager (REG.RU)
+- **Фронт (в работе):** миграция на Next.js — чтобы проще масштабировать и делать SSR страницы товаров
+- **Бэкенд:** Node.js + Express + SQLite, DaData для валидации адресов, nodemailer для транзакционных писем
+- **Деплой:** отдельный скрипт-сборщик артефактов `prepare-deploy.mjs` — отдельно пакетирует фронт под хостинг и API под VPS
+
+Структура репо: `frontend/` — текущий прод, `frontend-next/` — миграция на Next.js, `backend/` — API, `docs/` — ТЗ и инструкции по деплою.
+
+## 📦 Запуск
 
 ```bash
-# API
-cd backend
-npm install
-npm start                # слушает http://localhost:3000
-
-# Фронт — в другом терминале
-cd frontend
-python -m http.server 8000
-# открыть http://localhost:8000
+cd backend && npm install && npm start     # API на :3000
+cd frontend && python -m http.server 8000  # фронт на :8000
 ```
 
-## Деплой
+---
 
-```bash
-node scripts/prepare-deploy.mjs
-```
-
-Появятся:
-- `deploy/hosting/` — заливать через **ISPmanager** в корень домена на REG.RU
-- `deploy/api/` — разворачивать на VPS/PaaS (Node 18+)
-
-Подробности: [docs/deploy.md](docs/deploy.md).
+<sub>🟢 Коммерческий прод · [alanpir.ru](https://alanpir.ru)</sub>
