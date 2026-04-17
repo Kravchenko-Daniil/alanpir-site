@@ -1,19 +1,27 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Manrope:wght@200..800&display=swap');
+
 @theme {
-  --color-terracotta: #C04D29;
-  --color-bg-warm: #FAF9F6;
-  --color-ink: #1D1D1B;
-  --color-muted: #6B6B6B;
+  --color-accent: #F25C05;
+  --color-accent-dark: #D95204;
+  --color-ink: #2A1A14;
+  --color-muted: #857169;
+  --color-bg: #FAF7F2;
+  --color-bg-warm: #FAF7F2;
   --color-surface: #FFFFFF;
-  --color-border-warm: #E5E1DA;
+  --color-border-warm: #EADED9;
+  --color-danger: #E0433A;
   
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  /* Legacy alias so checkout and account don't break */
+  --color-terracotta: var(--color-accent);
+
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
 }
 
 body {
-  background-color: var(--color-bg-warm);
+  background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
