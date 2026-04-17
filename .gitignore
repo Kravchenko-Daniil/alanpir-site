@@ -24,8 +24,8 @@ secrets-prod
 *.key
 *.pem
 
-# Source archives (распакованы в frontend-next/)
-site-gemini.zip
+# Source archives (исходники от Gemini — хранятся только локально)
+*.zip
 
 # OS / editors
 .DS_Store
