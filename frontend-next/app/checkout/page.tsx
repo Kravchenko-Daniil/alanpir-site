@@ -7,6 +7,7 @@ import { ShoppingBag, MapPin, Clock, CreditCard, Smartphone, Banknote, Info } fr
 import StepCard from '@/components/checkout/StepCard';
 import AddressForm from '@/components/checkout/AddressForm';
 import OrderSummary from '@/components/checkout/OrderSummary';
+import ContactFields from '@/components/checkout/ContactFields';
 
 // Mock Data
 const MOCK_CART = [
@@ -70,34 +71,7 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Имя *</label>
-                <input 
-                  type="text" 
-                  className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors"
-                  placeholder="Иван"
-                  defaultValue={isAuth ? "Ибрагим" : ""}
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Телефон *</label>
-                <input 
-                  type="tel" 
-                  className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors"
-                  placeholder="+7 (___) ___-__-__"
-                  defaultValue={isAuth ? "+7 (926) 386-33-70" : ""}
-                />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Email (опционально)</label>
-                <input 
-                  type="email" 
-                  className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors"
-                  placeholder="Для отправки чека"
-                />
-              </div>
-            </div>
+            <ContactFields isAuth={isAuth} />
           </StepCard>
 
           {/* Step 2: Delivery Method */}
@@ -235,10 +209,15 @@ export default function CheckoutPage() {
                         <div className="font-medium text-ink text-sm mb-1">Москва, ул. Тихвинская, 20</div>
                         <div className="text-xs text-muted">Ежедневно с 08:30 до 19:00</div>
                       </div>
-                      <div className="w-full h-[200px] bg-[#EFECE7] relative flex items-center justify-center">
-                        <MapPin className="w-8 h-8 text-terracotta absolute" />
-                        <span className="text-xs text-muted mt-12">Карта загружается...</span>
-                      </div>
+                      <iframe
+                        src="https://yandex.ru/map-widget/v1/?ll=37.5876%2C55.7879&mode=search&oid=1111111111&ol=biz&z=16&text=%D1%83%D0%BB.%20%D0%A2%D0%B8%D1%85%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C%2020%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"
+                        width="100%"
+                        height="240"
+                        frameBorder="0"
+                        allowFullScreen
+                        title="Карта: АланПир, Тихвинская 20"
+                        className="block"
+                      />
                     </div>
                   </div>
 

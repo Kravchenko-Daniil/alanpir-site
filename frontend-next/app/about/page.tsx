@@ -1,5 +1,13 @@
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { CheckCircle2, Heart, Users, Wheat } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'О пекарне',
+  description:
+    'Пекарня АланПир — осетинские пироги ручной лепки из натуральных ингредиентов. Фермерское мясо, осетинский сыр, отборная мука. Печём под заказ.',
+  alternates: { canonical: '/about/' },
+};
 
 export default function AboutPage() {
   return (

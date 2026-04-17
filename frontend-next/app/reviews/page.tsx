@@ -1,4 +1,12 @@
+import type { Metadata } from 'next';
 import { Star } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Отзывы о пироговой АланПир',
+  description:
+    'Что говорят наши гости. Отзывы о доставке осетинских пирогов АланПир в Москве. Рейтинг 5 звёзд на Яндекс.Картах.',
+  alternates: { canonical: '/reviews/' },
+};
 
 const REVIEWS = [
   { id: 1, name: 'Анна С.', date: '12 апреля 2024', text: 'Заказывали на день рождения в офис. Пироги приехали горячими, начинки очень много, тесто тончайшее. Коллеги в восторге!', rating: 5 },

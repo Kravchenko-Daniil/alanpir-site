@@ -1,7 +1,17 @@
 import Link from 'next/link';
+import Script from 'next/script';
+import type { Metadata } from 'next';
 import ProductCard from '@/components/ProductCard';
 import { ChefHat, Leaf, Flame, Star, Gift, Truck, PieChart, UtensilsCrossed } from 'lucide-react';
 import { MENU } from '@/lib/menu';
+import { menuJsonLd } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'Осетинские пироги с доставкой по Москве',
+  description:
+    'Доставка горячих осетинских пирогов по Москве за 40–120 минут. Фыдджын, Цахараджын, Уалибах, сладкие пироги и сеты. Традиционные рецепты, ручная лепка.',
+  alternates: { canonical: '/' },
+};
 
 export default function Home() {
   const hits = MENU.filter((p) => p.badge === 'hit').slice(0, 4);
@@ -11,6 +21,12 @@ export default function Home() {
 
   return (
     <div className="pb-16 pt-4 sm:pt-6 flex flex-col gap-10 md:gap-16">
+      <Script
+        id="ld-menu"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(menuJsonLd(MENU)) }}
+      />
       
       {/* 1. Banner Slot */}
       <section>
