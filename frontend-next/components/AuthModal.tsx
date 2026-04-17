@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Eye, EyeOff } from 'lucide-react';
+import { X, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { IMaskInput } from 'react-imask';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useToast } from '@/hooks/useToast';
-import { formatPhone, isValidPhone, isValidEmail, isValidName, isValidPassword } from '@/lib/validation';
+import { isValidPhone, isValidEmail, isValidName, isValidPassword } from '@/lib/validation';
+import { api, ApiError, describeApiError } from '@/lib/api';
 
 type Errors = {
   name?: string;
@@ -13,10 +15,11 @@ type Errors = {
   email?: string;
   password?: string;
   consent?: string;
+  form?: string;
 };
 
 export default function AuthModal() {
-  const { isOpen, closeAuthModal, setIsAuth } = useAuthModal();
+  const { isOpen, closeAuthModal, login } = useAuthModal();
   const { show } = useToast();
   const [tab, setTab] = useState<'login' | 'register'>('login');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,11 +31,13 @@ export default function AuthModal() {
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setErrors({});
       setTouched({});
+      setSubmitting(false);
     }
   }, [isOpen]);
 
@@ -51,16 +56,39 @@ export default function AuthModal() {
     setErrors(validate());
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
     setTouched({ name: true, phone: true, email: true, password: true, consent: true });
     if (Object.keys(errs).length > 0) return;
 
-    setIsAuth(true);
-    closeAuthModal();
-    show(tab === 'login' ? 'Вы успешно вошли' : 'Регистрация прошла успешно', 'success');
+    setSubmitting(true);
+    try {
+      const endpoint = tab === 'login' ? '/api/auth/login' : '/api/auth/register';
+      const body = tab === 'register'
+        ? JSON.stringify({ phone, password, name })
+        : JSON.stringify({ phone, password });
+      const res = await api<{ ok: true; phone: string; name?: string | null }>(endpoint, {
+        method: 'POST',
+        body,
+      });
+      login({ phone: res.phone, name: res.name ?? (tab === 'register' ? name : null) });
+      closeAuthModal();
+      show(tab === 'login' ? 'Вы успешно вошли' : 'Регистрация прошла успешно', 'success');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        const msg = describeApiError(err.code);
+        setErrors({ form: msg });
+        show(msg, 'error');
+      } else {
+        const msg = 'Нет связи с сервером. Проверьте интернет.';
+        setErrors({ form: msg });
+        show(msg, 'error');
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const fieldClass = (hasError?: string) =>
@@ -134,12 +162,13 @@ export default function AuthModal() {
               )}
 
               <div>
-                <input
+                <IMaskInput
+                  mask="+{7} (000) 000-00-00"
+                  value={phone}
+                  onAccept={(value: string) => setPhone(value)}
                   type="tel"
                   inputMode="tel"
                   placeholder="+7 (___) ___-__-__"
-                  value={phone}
-                  onChange={(e) => setPhone(formatPhone(e.target.value))}
                   onBlur={() => onBlur('phone')}
                   className={fieldClass(touched.phone ? errors.phone : undefined)}
                 />
@@ -218,11 +247,17 @@ export default function AuthModal() {
                 </div>
               )}
 
+              {errors.form && (
+                <p className="text-xs text-danger text-center -mb-1">{errors.form}</p>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-accent text-white h-12 rounded-xl font-semibold hover:bg-accent-dark transition-colors mt-2"
+                disabled={submitting}
+                className="w-full bg-accent text-white h-12 rounded-xl font-semibold hover:bg-accent-dark transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {tab === 'login' ? 'Войти' : 'Зарегистрироваться'}
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {submitting ? 'Отправка…' : tab === 'login' ? 'Войти' : 'Зарегистрироваться'}
               </button>
             </form>
 

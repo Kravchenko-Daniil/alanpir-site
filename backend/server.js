@@ -73,10 +73,21 @@ db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     phone TEXT UNIQUE NOT NULL,
+    name TEXT,
     salt TEXT NOT NULL,
     hash TEXT NOT NULL,
     created_at TEXT NOT NULL
   )`);
+  // Migration: add `name` column to existing DBs (created before the column existed).
+  db.all(`PRAGMA table_info(users)`, (err, rows) => {
+    if (err) return;
+    const hasName = Array.isArray(rows) && rows.some((r) => r && r.name === 'name');
+    if (!hasName) {
+      db.run(`ALTER TABLE users ADD COLUMN name TEXT`, (e) => {
+        if (e && !/duplicate column/i.test(e.message)) console.error('[migrate] users.name:', e.message);
+      });
+    }
+  });
 
   db.run(`CREATE TABLE IF NOT EXISTS orders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -178,23 +189,39 @@ function hashPassword(password, salt) {
   return crypto.createHmac(HASH_ALGO, salt).update(password).digest('hex');
 }
 
+// One-off migration: phones used to be saved in POST /api/orders verbatim (with mask).
+// GET /api/orders?phone=… normalizes before querying, so older rows were invisible.
+// Idempotent — re-running skips already-normalized entries.
+db.all('SELECT id, phone FROM orders WHERE phone IS NOT NULL', (err, rows) => {
+  if (err || !Array.isArray(rows)) return;
+  for (const r of rows) {
+    if (!r || !r.phone) continue;
+    if (/^\+7\d{10}$/.test(r.phone)) continue;
+    const n = normalizePhone(r.phone);
+    if (/^\+7\d{10}$/.test(n)) {
+      db.run('UPDATE orders SET phone = ? WHERE id = ?', [n, r.id]);
+    }
+  }
+});
+
 app.post('/api/auth/register', (req, res) => {
-  const { phone, password } = req.body || {};
+  const { phone, password, name } = req.body || {};
   const norm = normalizePhone(phone);
   if (!/^\+7\d{10}$/.test(norm)) return res.status(400).json({ ok: false, error: 'INVALID_PHONE' });
   if (typeof password !== 'string' || password.length < 6) return res.status(400).json({ ok: false, error: 'WEAK_PASSWORD' });
 
+  const cleanName = typeof name === 'string' ? name.trim().slice(0, 80) : null;
   const salt = crypto.randomBytes(16).toString('hex');
   const hash = hashPassword(password, salt);
   const createdAt = new Date().toISOString();
 
-  const stmt = db.prepare('INSERT INTO users (phone, salt, hash, created_at) VALUES (?, ?, ?, ?)');
-  stmt.run(norm, salt, hash, createdAt, function (err) {
+  const stmt = db.prepare('INSERT INTO users (phone, name, salt, hash, created_at) VALUES (?, ?, ?, ?, ?)');
+  stmt.run(norm, cleanName, salt, hash, createdAt, function (err) {
     if (err) {
       if (err.message && err.message.includes('UNIQUE')) return res.status(409).json({ ok: false, error: 'USER_EXISTS' });
       return res.status(500).json({ ok: false, error: 'DB_ERROR' });
     }
-    res.json({ ok: true, phone: norm });
+    res.json({ ok: true, phone: norm, name: cleanName });
   });
 });
 
@@ -203,18 +230,18 @@ app.post('/api/auth/login', (req, res) => {
   const norm = normalizePhone(phone);
   if (!/^\+7\d{10}$/.test(norm)) return res.status(400).json({ ok: false, error: 'INVALID_PHONE' });
 
-  db.get('SELECT salt, hash FROM users WHERE phone = ?', [norm], (err, row) => {
+  db.get('SELECT salt, hash, name FROM users WHERE phone = ?', [norm], (err, row) => {
     if (err) return res.status(500).json({ ok: false, error: 'DB_ERROR' });
     if (!row) return res.status(401).json({ ok: false, error: 'NO_USER' });
     const calc = hashPassword(password || '', row.salt);
     if (calc !== row.hash) return res.status(401).json({ ok: false, error: 'BAD_CREDENTIALS' });
-    res.json({ ok: true, phone: norm });
+    res.json({ ok: true, phone: norm, name: row.name || null });
   });
 });
 
 app.post('/api/orders', (req, res) => {
   const {
-    phone = null,
+    phone: rawPhone = null,
     name = null,
     address = null,
     addressData = null,
@@ -226,6 +253,9 @@ app.post('/api/orders', (req, res) => {
     delivery = 0,
     total = 0
   } = req.body || {};
+
+  // Always normalize phone so `GET /api/orders?phone=…` can find the row later.
+  const phone = rawPhone ? normalizePhone(rawPhone) : null;
 
   if (!Array.isArray(items) || !items.length) {
     return res.status(400).json({ ok: false, error: 'EMPTY_CART' });

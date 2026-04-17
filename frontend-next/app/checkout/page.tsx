@@ -1,31 +1,146 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, MapPin, Clock, CreditCard, Smartphone, Banknote, Info } from 'lucide-react';
+import { ShoppingBag, MapPin, CreditCard, Smartphone, Banknote, Info, X } from 'lucide-react';
 import StepCard from '@/components/checkout/StepCard';
 import AddressForm from '@/components/checkout/AddressForm';
 import OrderSummary from '@/components/checkout/OrderSummary';
-import ContactFields from '@/components/checkout/ContactFields';
+import ContactFields, { isContactValid, type ContactValue } from '@/components/checkout/ContactFields';
+import type { SavedAddress } from '@/lib/address';
+import { useAuthModal } from '@/hooks/useAuthModal';
+import { useSavedAddresses } from '@/hooks/useSavedAddresses';
+import { useToast } from '@/hooks/useToast';
+import { api, ApiError, describeApiError } from '@/lib/api';
 
-// Mock Data
+// Mock Data — корзина пока не подключена к глобальному useCart
 const MOCK_CART = [
   { id: '1', name: 'Фыдджын (мясной)', weight: '1000 г', price: 1290, qty: 1, imageEmoji: '🥩' },
   { id: '2', name: 'Цахараджын', weight: '1000 г', price: 1120, qty: 1, imageEmoji: '🍃' },
   { id: '3', name: 'Морс клюквенный', weight: '1 л', price: 430, qty: 1, imageEmoji: '🥤' },
 ];
 
+const MIN_ORDER_FOR_DELIVERY = 2000;
+const FREE_DELIVERY_THRESHOLD = 5000;
+const FLAT_DELIVERY_COST = 140;
+
 export default function CheckoutPage() {
+  const router = useRouter();
+  const { show } = useToast();
+  const { isAuth, name: authName, logout, openAuthModal } = useAuthModal();
+
   const [cartItems] = useState(MOCK_CART);
-  const [isAuth] = useState(false); // Toggle to test auth state
-  
+
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [deliveryTime, setDeliveryTime] = useState<'asap' | 'scheduled'>('asap');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'sbp' | 'cash'>('card');
-  const [isAddingAddress, setIsAddingAddress] = useState(false);
 
-  // Empty State
+  const [isAddingAddress, setIsAddingAddress] = useState(false);
+  const { addresses, selectedId: selectedAddressId, setSelectedId: setSelectedAddressId, addAddress, removeAddress } = useSavedAddresses();
+
+  const [contact, setContact] = useState<ContactValue>({ name: '', phone: '', email: '' });
+  const [comment, setComment] = useState('');
+  const [noCall, setNoCall] = useState(false);
+  const [needUtensils, setNeedUtensils] = useState(false);
+
+  const [promoCode, setPromoCode] = useState('');
+  const [promoActive, setPromoActive] = useState(false);
+
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleAddAddress = (addr: SavedAddress) => {
+    addAddress(addr);
+    setIsAddingAddress(false);
+  };
+
+  const subtotal = useMemo(
+    () => cartItems.reduce((acc, i) => acc + i.price * i.qty, 0),
+    [cartItems],
+  );
+
+  const isDelivery = deliveryMethod === 'delivery';
+  const isBelowMinOrder = isDelivery && subtotal < MIN_ORDER_FOR_DELIVERY;
+  const missingForMinOrder = MIN_ORDER_FOR_DELIVERY - subtotal;
+
+  let discount = 0;
+  if (promoActive) discount += subtotal * 0.1;
+  if (!isDelivery) discount += subtotal * 0.1;
+
+  const deliveryCost = isDelivery ? (subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : FLAT_DELIVERY_COST) : 0;
+  const total = subtotal - discount + deliveryCost;
+
+  const selectedAddress = addresses.find((a) => a.id === selectedAddressId) ?? null;
+
+  const handleSubmit = async () => {
+    if (cartItems.length === 0) { show('Корзина пустая', 'error'); return; }
+    if (!isContactValid(contact)) { show('Заполните имя и телефон корректно', 'error'); return; }
+    if (isDelivery) {
+      if (!selectedAddress) { show('Выберите или добавьте адрес доставки', 'error'); return; }
+      if (!selectedAddress.street || !selectedAddress.house) {
+        show('Адрес не полный — выберите из подсказок с номером дома', 'error');
+        return;
+      }
+      if (isBelowMinOrder) {
+        show(`До минимального заказа не хватает ${missingForMinOrder} ₽`, 'error');
+        return;
+      }
+    }
+
+    setSubmitting(true);
+    try {
+      const pickupAddress = 'Самовывоз: г. Москва, ул. Трифоновская, 4';
+      const payload = {
+        phone: contact.phone,
+        name: contact.name,
+        email: contact.email || null,
+        address: isDelivery ? selectedAddress?.fullValue : pickupAddress,
+        addressData: isDelivery && selectedAddress ? {
+          street: selectedAddress.street || '',
+          house: selectedAddress.house || '',
+          apt: selectedAddress.apt,
+          entrance: selectedAddress.entrance,
+          floor: selectedAddress.floor,
+          code: selectedAddress.intercom,
+        } : null,
+        paymentMethod,
+        items: cartItems.map((i) => ({
+          id: i.id,
+          name: i.name,
+          title: i.name,
+          weight: i.weight,
+          price: i.price,
+          qty: i.qty,
+        })),
+        promo: promoActive && promoCode ? promoCode : null,
+        subtotal,
+        discount: Math.round(discount),
+        delivery: deliveryCost,
+        total: Math.round(total),
+        comment: comment || null,
+        noCall,
+        needUtensils,
+        deliveryTime: deliveryTime === 'asap' ? null : 'scheduled',
+      };
+
+      const res = await api<{ ok: true; orderId: number }>('/api/orders', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      router.push(`/order/?id=${res.orderId}`);
+    } catch (err) {
+      if (err instanceof ApiError) {
+        show(describeApiError(err.code), 'error');
+      } else {
+        show('Нет связи с сервером. Попробуйте ещё раз.', 'error');
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (cartItems.length === 0) {
     return (
       <div className="py-20 flex flex-col items-center justify-center text-center">
@@ -36,7 +151,7 @@ export default function CheckoutPage() {
         <p className="text-muted mb-8 max-w-md">
           Добавьте вкусные осетинские пироги из нашего меню, чтобы оформить заказ.
         </p>
-        <Link 
+        <Link
           href="/catalog"
           className="bg-terracotta text-white px-8 py-4 rounded-xl font-semibold hover:bg-opacity-90 transition-opacity"
         >
@@ -53,30 +168,31 @@ export default function CheckoutPage() {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-8 items-start">
-        
+
         {/* Left Column: Steps */}
         <div className="flex flex-col gap-6">
-          
+
           {/* Step 1: Contacts */}
           <StepCard step={1} title="Контакты">
             {isAuth ? (
               <div className="bg-bg-warm border border-border-warm rounded-xl p-4 flex items-center justify-between mb-6">
-                <span className="text-sm font-medium text-ink">Вы вошли как Ибрагим</span>
-                <button className="text-sm text-terracotta hover:underline">Выйти</button>
+                <span className="text-sm font-medium text-ink">
+                  Вы вошли{authName ? ` как ${authName}` : ''}
+                </span>
+                <button type="button" onClick={logout} className="text-sm text-terracotta hover:underline">Выйти</button>
               </div>
             ) : (
               <div className="mb-6 text-sm">
-                <button className="text-terracotta font-medium hover:underline">Войти</button>
+                <button type="button" onClick={openAuthModal} className="text-terracotta font-medium hover:underline">Войти</button>
                 <span className="text-muted">, чтобы быстрее оформить заказ и копить бонусы.</span>
               </div>
             )}
 
-            <ContactFields isAuth={isAuth} />
+            <ContactFields value={contact} onChange={setContact} />
           </StepCard>
 
           {/* Step 2: Delivery Method */}
           <StepCard step={2} title="Способ получения">
-            {/* Segmented Control */}
             <div className="flex p-1 bg-bg-warm border border-border-warm rounded-xl mb-6">
               <button
                 onClick={() => setDeliveryMethod('delivery')}
@@ -106,61 +222,88 @@ export default function CheckoutPage() {
                   transition={{ duration: 0.2 }}
                   className="space-y-6"
                 >
-                  {/* Address Block */}
                   <div>
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Куда доставить?</h3>
-                    {isAuth && (
-                      <div className="mb-3">
-                        <label className="flex items-start gap-3 p-4 rounded-xl border border-terracotta bg-terracotta/5 cursor-pointer">
-                          <input type="radio" name="saved_address" defaultChecked className="mt-1 text-terracotta focus:ring-terracotta" />
-                          <div className="flex-1">
-                            <div className="font-medium text-ink text-sm">Москва, ул. Ленина, 10</div>
-                            <div className="text-xs text-muted mt-0.5">Подъезд 1, этаж 5, кв 42</div>
-                          </div>
-                          <button className="text-xs text-terracotta hover:underline">Изменить</button>
-                        </label>
+                    {addresses.length > 0 && (
+                      <div className="mb-3 space-y-2">
+                        {addresses.map((a) => {
+                          const details = [
+                            a.apt && `кв ${a.apt}`,
+                            a.entrance && `подъезд ${a.entrance}`,
+                            a.floor && `эт ${a.floor}`,
+                            a.intercom && `домофон ${a.intercom}`,
+                          ].filter(Boolean).join(', ');
+                          const isSelected = selectedAddressId === a.id;
+                          return (
+                            <label
+                              key={a.id}
+                              className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
+                                isSelected ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="saved_address"
+                                checked={isSelected}
+                                onChange={() => setSelectedAddressId(a.id)}
+                                className="mt-1 text-terracotta focus:ring-terracotta"
+                              />
+                              <div className="flex-1 min-w-0">
+                                <div className="font-medium text-ink text-sm truncate">{a.shortLabel}</div>
+                                {details && <div className="text-xs text-muted mt-0.5 truncate">{details}</div>}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeAddress(a.id); }}
+                                aria-label="Удалить адрес"
+                                className="text-muted hover:text-danger transition-colors"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
+                            </label>
+                          );
+                        })}
                       </div>
                     )}
-                    
+
                     {!isAddingAddress ? (
-                      <button 
+                      <button
                         onClick={() => setIsAddingAddress(true)}
                         className="w-full py-4 border-2 border-dashed border-border-warm rounded-xl text-sm font-medium text-ink hover:border-terracotta hover:text-terracotta transition-colors flex items-center justify-center gap-2"
                       >
                         <MapPin className="w-4 h-4" />
-                        + Добавить новый адрес
+                        {addresses.length > 0 ? '+ Добавить ещё адрес' : '+ Добавить адрес'}
                       </button>
                     ) : (
-                      <AddressForm 
-                        onCancel={() => setIsAddingAddress(false)} 
-                        onSave={() => setIsAddingAddress(false)} 
+                      <AddressForm
+                        onCancel={() => setIsAddingAddress(false)}
+                        onSave={handleAddAddress}
                       />
                     )}
                   </div>
 
-                  {/* Time Block */}
                   <div>
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Когда доставить?</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       <label className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${deliveryTime === 'asap' ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
-                        <input 
-                          type="radio" 
-                          name="time" 
-                          checked={deliveryTime === 'asap'} 
+                        <input
+                          type="radio"
+                          name="time"
+                          checked={deliveryTime === 'asap'}
                           onChange={() => setDeliveryTime('asap')}
                           className="text-terracotta focus:ring-terracotta"
                         />
-                        <span className="text-sm font-medium text-ink">Как можно скорее<br/><span className="text-xs text-muted font-normal">~ 60-90 минут</span></span>
+                        <span className="text-sm font-medium text-ink">Как можно скорее<br /><span className="text-xs text-muted font-normal">~ 60-90 минут</span></span>
                       </label>
                       <label className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${deliveryTime === 'scheduled' ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
-                        <input 
-                          type="radio" 
-                          name="time" 
-                          checked={deliveryTime === 'scheduled'} 
+                        <input
+                          type="radio"
+                          name="time"
+                          checked={deliveryTime === 'scheduled'}
                           onChange={() => setDeliveryTime('scheduled')}
                           className="text-terracotta focus:ring-terracotta"
                         />
-                        <span className="text-sm font-medium text-ink">Ко времени<br/><span className="text-xs text-muted font-normal">Выбрать интервал</span></span>
+                        <span className="text-sm font-medium text-ink">Ко времени<br /><span className="text-xs text-muted font-normal">Выбрать интервал</span></span>
                       </label>
                     </div>
 
@@ -186,7 +329,6 @@ export default function CheckoutPage() {
                     </AnimatePresence>
                   </div>
 
-                  {/* Info Banner */}
                   <div className="bg-bg-warm rounded-xl p-3 flex items-start gap-2 text-xs text-muted">
                     <Info className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
                     <p>Доставка по Москве от 20 ₽/км. Минимальный заказ 2000 ₽. Бесплатно при заказе от 5000 ₽.</p>
@@ -201,7 +343,6 @@ export default function CheckoutPage() {
                   transition={{ duration: 0.2 }}
                   className="space-y-6"
                 >
-                  {/* Pickup Address */}
                   <div>
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Пункт выдачи</h3>
                     <div className="border border-border-warm rounded-xl overflow-hidden">
@@ -221,35 +362,33 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  {/* Discount Banner */}
                   <div className="bg-terracotta/10 border border-terracotta/20 rounded-xl p-3 flex items-start gap-2 text-sm text-terracotta">
                     <Info className="w-5 h-5 shrink-0" />
                     <p>При самовывозе действует <b>скидка 10%</b> (не суммируется с промокодами и сетами).</p>
                   </div>
 
-                  {/* Time Block */}
                   <div>
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Когда заберете?</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       <label className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${deliveryTime === 'asap' ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
-                        <input 
-                          type="radio" 
-                          name="pickup_time" 
-                          checked={deliveryTime === 'asap'} 
+                        <input
+                          type="radio"
+                          name="pickup_time"
+                          checked={deliveryTime === 'asap'}
                           onChange={() => setDeliveryTime('asap')}
                           className="text-terracotta focus:ring-terracotta"
                         />
-                        <span className="text-sm font-medium text-ink">Как можно скорее<br/><span className="text-xs text-muted font-normal">Через 20-30 минут</span></span>
+                        <span className="text-sm font-medium text-ink">Как можно скорее<br /><span className="text-xs text-muted font-normal">Через 20-30 минут</span></span>
                       </label>
                       <label className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${deliveryTime === 'scheduled' ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
-                        <input 
-                          type="radio" 
-                          name="pickup_time" 
-                          checked={deliveryTime === 'scheduled'} 
+                        <input
+                          type="radio"
+                          name="pickup_time"
+                          checked={deliveryTime === 'scheduled'}
                           onChange={() => setDeliveryTime('scheduled')}
                           className="text-terracotta focus:ring-terracotta"
                         />
-                        <span className="text-sm font-medium text-ink">Ко времени<br/><span className="text-xs text-muted font-normal">Выбрать время</span></span>
+                        <span className="text-sm font-medium text-ink">Ко времени<br /><span className="text-xs text-muted font-normal">Выбрать время</span></span>
                       </label>
                     </div>
                     <AnimatePresence>
@@ -289,7 +428,7 @@ export default function CheckoutPage() {
                   <div className="text-xs text-muted">МИР, Visa, MasterCard</div>
                 </div>
               </label>
-              
+
               <label className={`flex flex-col gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${paymentMethod === 'sbp' ? 'border-terracotta border-2 bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
                 <input type="radio" name="payment" className="sr-only" checked={paymentMethod === 'sbp'} onChange={() => setPaymentMethod('sbp')} />
                 <Smartphone className={`w-6 h-6 ${paymentMethod === 'sbp' ? 'text-terracotta' : 'text-ink'}`} />
@@ -309,29 +448,41 @@ export default function CheckoutPage() {
               </label>
             </div>
             <p className="text-xs text-muted mt-4">
-              Нажимая "Оформить заказ", вы соглашаетесь с условиями публичной оферты.
+              Нажимая «Оформить заказ», вы соглашаетесь с условиями публичной оферты.
             </p>
           </StepCard>
 
           {/* Step 4: Comments */}
           <StepCard step={4} title="Комментарий к заказу">
-            <textarea 
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               className="w-full p-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors min-h-[100px] resize-y mb-4 text-sm"
               placeholder="Дополнения, аллергии, пожелания курьеру..."
-            ></textarea>
-            
+            />
+
             <div className="space-y-3">
               <label className="flex items-center gap-3 cursor-pointer group">
-                <div className="relative flex items-center justify-center w-5 h-5 border border-border-warm rounded bg-surface group-hover:border-terracotta transition-colors">
-                  <input type="checkbox" className="peer sr-only" />
+                <div className={`relative flex items-center justify-center w-5 h-5 border rounded bg-surface group-hover:border-terracotta transition-colors ${noCall ? 'border-terracotta' : 'border-border-warm'}`}>
+                  <input
+                    type="checkbox"
+                    checked={noCall}
+                    onChange={(e) => setNoCall(e.target.checked)}
+                    className="peer sr-only"
+                  />
                   <div className="hidden peer-checked:block w-3 h-3 bg-terracotta rounded-sm"></div>
                 </div>
                 <span className="text-sm text-ink">Не звонить, привезти молча</span>
               </label>
-              
+
               <label className="flex items-center gap-3 cursor-pointer group">
-                <div className="relative flex items-center justify-center w-5 h-5 border border-border-warm rounded bg-surface group-hover:border-terracotta transition-colors">
-                  <input type="checkbox" className="peer sr-only" />
+                <div className={`relative flex items-center justify-center w-5 h-5 border rounded bg-surface group-hover:border-terracotta transition-colors ${needUtensils ? 'border-terracotta' : 'border-border-warm'}`}>
+                  <input
+                    type="checkbox"
+                    checked={needUtensils}
+                    onChange={(e) => setNeedUtensils(e.target.checked)}
+                    className="peer sr-only"
+                  />
                   <div className="hidden peer-checked:block w-3 h-3 bg-terracotta rounded-sm"></div>
                 </div>
                 <span className="text-sm text-ink">Нужны приборы и салфетки</span>
@@ -343,7 +494,23 @@ export default function CheckoutPage() {
 
         {/* Right Column: Order Summary */}
         <div className="relative">
-          <OrderSummary items={cartItems} deliveryMethod={deliveryMethod} />
+          <OrderSummary
+            items={cartItems}
+            deliveryMethod={deliveryMethod}
+            promoCode={promoCode}
+            promoActive={promoActive}
+            onPromoCodeChange={setPromoCode}
+            onApplyPromo={() => { if (promoCode.trim()) setPromoActive(true); }}
+            onRemovePromo={() => { setPromoActive(false); setPromoCode(''); }}
+            subtotal={subtotal}
+            discount={discount}
+            deliveryCost={deliveryCost}
+            total={total}
+            isBelowMinOrder={isBelowMinOrder}
+            missingForMinOrder={missingForMinOrder}
+            submitting={submitting}
+            onSubmit={handleSubmit}
+          />
         </div>
 
       </div>

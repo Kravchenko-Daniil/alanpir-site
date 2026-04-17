@@ -1,24 +1,47 @@
 'use client';
 
-import { useState } from 'react';
-import { formatPhone, isValidPhone, isValidEmail, isValidName } from '@/lib/validation';
+import { useEffect, useState } from 'react';
+import { IMaskInput } from 'react-imask';
+import { isValidPhone, isValidEmail, isValidName } from '@/lib/validation';
+import { useAuthModal } from '@/hooks/useAuthModal';
 
-interface ContactFieldsProps {
-  isAuth: boolean;
+export type ContactValue = {
+  name: string;
+  phone: string;
+  email: string;
+};
+
+export function isContactValid(v: ContactValue): boolean {
+  if (!isValidName(v.name)) return false;
+  if (!isValidPhone(v.phone)) return false;
+  if (v.email && !isValidEmail(v.email)) return false;
+  return true;
 }
 
-type Field = 'name' | 'phone' | 'email';
+type Field = keyof ContactValue;
 
-export default function ContactFields({ isAuth }: ContactFieldsProps) {
-  const [name, setName] = useState(isAuth ? 'Ибрагим' : '');
-  const [phone, setPhone] = useState(isAuth ? '+7 (926) 499-00-99' : '');
-  const [email, setEmail] = useState('');
+interface ContactFieldsProps {
+  value: ContactValue;
+  onChange: (value: ContactValue) => void;
+}
+
+export default function ContactFields({ value, onChange }: ContactFieldsProps) {
+  const { phone: authPhone, name: authName } = useAuthModal();
   const [touched, setTouched] = useState<Record<Field, boolean>>({ name: false, phone: false, email: false });
 
+  useEffect(() => {
+    const patch: Partial<ContactValue> = {};
+    if (authName && !value.name) patch.name = authName;
+    if (authPhone && !value.phone) patch.phone = authPhone;
+    if (Object.keys(patch).length) onChange({ ...value, ...patch });
+  }, [authName, authPhone]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const patch = (f: Field, v: string) => onChange({ ...value, [f]: v });
+
   const errors = {
-    name: !isValidName(name) ? 'Укажите имя (минимум 2 символа)' : '',
-    phone: !isValidPhone(phone) ? 'Введите корректный номер' : '',
-    email: email && !isValidEmail(email) ? 'Неверный формат email' : '',
+    name: !isValidName(value.name) ? 'Укажите имя (минимум 2 символа)' : '',
+    phone: !isValidPhone(value.phone) ? 'Введите корректный номер' : '',
+    email: value.email && !isValidEmail(value.email) ? 'Неверный формат email' : '',
   };
 
   const fieldClass = (err: string, wasTouched: boolean) =>
@@ -32,8 +55,8 @@ export default function ContactFields({ isAuth }: ContactFieldsProps) {
         <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Имя *</label>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={value.name}
+          onChange={(e) => patch('name', e.target.value)}
           onBlur={() => setTouched((t) => ({ ...t, name: true }))}
           className={fieldClass(errors.name, touched.name)}
           placeholder="Иван"
@@ -42,11 +65,12 @@ export default function ContactFields({ isAuth }: ContactFieldsProps) {
       </div>
       <div>
         <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Телефон *</label>
-        <input
+        <IMaskInput
+          mask="+{7} (000) 000-00-00"
+          value={value.phone}
+          onAccept={(v: string) => patch('phone', v)}
           type="tel"
           inputMode="tel"
-          value={phone}
-          onChange={(e) => setPhone(formatPhone(e.target.value))}
           onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
           className={fieldClass(errors.phone, touched.phone)}
           placeholder="+7 (___) ___-__-__"
@@ -57,8 +81,8 @@ export default function ContactFields({ isAuth }: ContactFieldsProps) {
         <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Email (опционально)</label>
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={value.email}
+          onChange={(e) => patch('email', e.target.value)}
           onBlur={() => setTouched((t) => ({ ...t, email: true }))}
           className={fieldClass(errors.email, touched.email)}
           placeholder="Для отправки чека"
