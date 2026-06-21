@@ -6,18 +6,21 @@ import { X, Leaf } from 'lucide-react';
 import Image from 'next/image';
 import { useProductModal } from '@/hooks/useProductModal';
 import { useToast } from '@/hooks/useToast';
+import { useCart } from '@/hooks/useCart';
+import { defaultWeightIdx, formatWeight } from '@/lib/menu';
 
 const BADGE_LABEL = { hit: 'Хит', new: 'Новинка' } as const;
 
 export default function ProductModal() {
   const { isOpen, closeModal, product } = useProductModal();
   const { show } = useToast();
+  const { addItem } = useCart();
   const [weightIdx, setWeightIdx] = useState(0);
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
     if (product) {
-      setWeightIdx(0);
+      setWeightIdx(defaultWeightIdx(product));
       setQty(1);
     }
   }, [product]);
@@ -35,6 +38,8 @@ export default function ProductModal() {
     : [];
 
   const handleAddToCart = () => {
+    if (!hasWeights) return;
+    addItem(product, weightIdx, qty);
     show(`Добавлено в корзину: ${product.title}`, 'success');
     closeModal();
   };
@@ -65,12 +70,13 @@ export default function ProductModal() {
             </button>
 
             <div className="w-full md:w-1/2 bg-bg-warm p-6 flex flex-col items-center justify-center min-h-[240px] md:min-h-[400px]">
-              <div className="w-48 h-48 md:w-64 md:h-64 relative flex items-center justify-center text-8xl mb-6">
-                {product.image ? (
-                  <Image src={product.image} alt={product.title} fill className="object-cover rounded-full" />
-                ) : (
-                  product.emoji
-                )}
+              <div className="w-48 h-48 md:w-64 md:h-64 relative flex items-center justify-center mb-6 overflow-hidden rounded-full bg-white">
+                <Image
+                  src={product.image ?? '/menu/_placeholder.svg'}
+                  alt={product.title}
+                  fill
+                  className="object-contain p-2"
+                />
               </div>
             </div>
 
@@ -103,7 +109,7 @@ export default function ProductModal() {
                               : 'bg-bg-warm text-ink border-border-warm hover:border-ink'
                           }`}
                         >
-                          {w.weight} · {w.price.toLocaleString('ru-RU')} ₽
+                          {formatWeight(w.weight)} · {w.price.toLocaleString('ru-RU')} ₽
                         </button>
                       ))}
                     </div>

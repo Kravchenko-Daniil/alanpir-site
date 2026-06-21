@@ -52,7 +52,7 @@
 - iframe-виджет на checkout-самовывозе
 
 ### 1.6 ✅ Отправка заказов через свой бэкенд (вместо Web3Forms)
-- Backend на vps-4vps отвечает за `/api/orders` (SQLite + опциональный email через nodemailer)
+- Backend на my-4vps отвечает за `/api/orders` (SQLite + опциональный email через nodemailer)
 - Web3Forms отменили — свой путь чище и гибче
 - 📋 **Остаётся**: получить SMTP-креды от Рамиля и положить в `/opt/alanpir-api/.env`, чтобы письма фактически уходили. Сейчас заказы молча копятся в БД.
 
@@ -77,10 +77,10 @@
 Сейчас заглушки от Gemini. Клиент даёт свой текст → я верстаю.
 
 ### 1.10 📋 Деплой на alanpir.ru
-Когда всё выше готово: собрать `out/`, через ISPmanager залить в корень домена. Бэк оставить на отдельном VPS (не vps-4vps — он временный).
+Когда всё выше готово: собрать `out/`, через ISPmanager залить в корень домена. Бэк оставить на отдельном VPS (не my-4vps — он временный).
 
 ### 1.11 📋 Долгосрочный VPS под API
-vps-4vps удалят через ~10 дней. Нужен постоянный (Timeweb / Selectel / Beget, ~300 ₽/мес). Перенос — минимальный: Node 20 + pm2 + scp backend/ + тот же nginx-конфиг. См. быстрые команды в `CLAUDE.md`.
+my-4vps удалят через ~10 дней. Нужен постоянный (Timeweb / Selectel / Beget, ~300 ₽/мес). Перенос — минимальный: Node 20 + pm2 + scp backend/ + тот же nginx-конфиг. См. быстрые команды в `CLAUDE.md`.
 
 ---
 
@@ -108,7 +108,7 @@ vps-4vps удалят через ~10 дней. Нужен постоянный (
 - Заполнить `image: '/menu/...'` в `lib/menu.ts`
 
 ### 3.2 ✅→📋 Backend — надёжность и фичи
-- ✅ Развёрнут на vps-4vps (временный)
+- ✅ Развёрнут на my-4vps (временный)
 - 📋 Перенести на долгосрочный VPS (см. 1.11)
 - 📋 Адреса пользователя **в БД** (таблица `addresses` с `user_id`) вместо текущего `localStorage` — чтобы переезжали между устройствами
 - 📋 JWT/сессии вместо текущего «фронт верит localStorage-у» — сейчас кто угодно может подделать `alanpir:auth`
@@ -149,9 +149,9 @@ vps-4vps удалят через ~10 дней. Нужен постоянный (
 ## 5. Логистика разработки
 
 - **Dev-превью**: http://185.177.238.230/ (фронт) + http://185.177.238.230/api/* (бэк, через nginx-прокси)
-- **Деплой фронта**: `cd frontend-next && npm run build && ssh vps-4vps 'rm -rf /var/www/alanpir-next/*' && scp -r out/. vps-4vps:/var/www/alanpir-next/`
-- **Перезалить бэк**: `rsync -az --exclude node_modules --exclude '*.sqlite*' --exclude '.env*' backend/ vps-4vps:/opt/alanpir-api/ && ssh vps-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-api'`
-- **Перезапуск pm2 после правок .env**: `scp backend/.env vps-4vps:/opt/alanpir-api/.env && ssh vps-4vps 'pm2 restart alanpir-api'`
+- **Деплой фронта**: `cd frontend-next && npm run build && ssh my-4vps 'rm -rf /var/www/alanpir-next/*' && scp -r out/. my-4vps:/var/www/alanpir-next/`
+- **Перезалить бэк**: `rsync -az --exclude node_modules --exclude '*.sqlite*' --exclude '.env*' backend/ my-4vps:/opt/alanpir-api/ && ssh my-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-api'`
+- **Перезапуск pm2 после правок .env**: `scp backend/.env my-4vps:/opt/alanpir-api/.env && ssh my-4vps 'pm2 restart alanpir-api'`
 - **Прод (будущее)**: REG.RU ISPmanager для фронта + долгосрочный VPS для бэка (см. 1.11)
 - **Git**: main → не деплоится автоматически, руками
 
@@ -165,5 +165,5 @@ vps-4vps удалят через ~10 дней. Нужен постоянный (
 1. SMTP-креды от Рамиля → email-нотификации заказов
 2. Финальный лого от Рамиля → Header + Footer + favicon
 3. Тексты «О нас» и «Доставка» от клиента
-4. Выбор и покупка долгосрочного VPS под API (сейчас на временном vps-4vps)
+4. Выбор и покупка долгосрочного VPS под API (сейчас на временном my-4vps)
 5. Доступ в ISPmanager REG.RU → заливка фронта

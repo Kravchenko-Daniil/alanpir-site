@@ -7,11 +7,10 @@ import Image from 'next/image';
 import { useCart } from '@/hooks/useCart';
 
 export default function CartDrawer() {
-  const { isOpen, closeCart, items } = useCart();
+  const { isOpen, closeCart, items, displayItems, subtotal, updateQty, removeItem } = useCart();
 
-  const subtotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const discount = 0; // Mock
-  const delivery = subtotal > 0 ? 140 : 0; // Mock
+  const discount = 0;
+  const delivery = subtotal > 0 ? 140 : 0;
   const total = subtotal - discount + delivery;
 
   return (
@@ -52,15 +51,15 @@ export default function CartDrawer() {
                   </div>
                   <h3 className="text-lg font-serif text-ink mb-2">Корзина пуста</h3>
                   <p className="text-sm text-muted mb-6">Добавьте что-нибудь из каталога</p>
-                  <button onClick={closeCart} className="bg-terracotta text-white px-6 py-3 rounded-xl font-semibold hover:bg-opacity-90 transition-opacity">
+                  <Link href="/catalog" onClick={closeCart} className="bg-terracotta text-white px-6 py-3 rounded-xl font-semibold hover:bg-opacity-90 transition-opacity">
                     В каталог
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <>
                   {/* Items */}
                   <div className="flex flex-col gap-4">
-                    {items.map((item) => (
+                    {displayItems.map((item) => (
                       <div key={item.id} className="flex gap-4">
                         <div className="w-16 h-16 rounded-xl bg-[#F5F5F5] flex items-center justify-center text-3xl shrink-0 overflow-hidden relative">
                           {item.imageUrl ? (
@@ -73,22 +72,51 @@ export default function CartDrawer() {
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <div className="text-sm font-semibold text-ink leading-tight mb-1">{item.name}</div>
-                              <div className="inline-block px-2 py-0.5 bg-bg-warm rounded-full text-[10px] font-medium text-muted">
-                                {item.weight}
+                              <div className="flex items-center gap-1.5">
+                                <div className="inline-block px-2 py-0.5 bg-bg-warm rounded-full text-[10px] font-medium text-muted">
+                                  {item.weight}
+                                </div>
+                                {item.isBonus && (
+                                  <div className="inline-block px-2 py-0.5 bg-terracotta/10 rounded-full text-[10px] font-semibold text-terracotta">
+                                    Бонус
+                                  </div>
+                                )}
                               </div>
                             </div>
-                            <button className="text-muted hover:text-terracotta transition-colors">
-                              <Trash2 className="w-4 h-4" />
-                            </button>
+                            {!item.isBonus && (
+                              <button
+                                onClick={() => removeItem(item.id)}
+                                aria-label="Удалить из корзины"
+                                className="text-muted hover:text-terracotta transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
                           </div>
                           <div className="flex items-center justify-between mt-2">
-                            <div className="flex items-center gap-3 bg-bg-warm rounded-full px-2 py-1">
-                              <button className="w-6 h-6 flex items-center justify-center text-ink font-medium hover:text-terracotta">-</button>
-                              <span className="text-xs font-semibold w-4 text-center">{item.qty}</span>
-                              <button className="w-6 h-6 flex items-center justify-center text-ink font-medium hover:text-terracotta">+</button>
-                            </div>
+                            {item.isBonus ? (
+                              <span className="text-xs font-medium text-muted">В подарок к заказу</span>
+                            ) : (
+                              <div className="flex items-center gap-3 bg-bg-warm rounded-full px-2 py-1">
+                                <button
+                                  onClick={() => updateQty(item.id, item.qty - 1)}
+                                  aria-label="Уменьшить количество"
+                                  className="w-6 h-6 flex items-center justify-center text-ink font-medium hover:text-terracotta"
+                                >
+                                  −
+                                </button>
+                                <span className="text-xs font-semibold w-4 text-center">{item.qty}</span>
+                                <button
+                                  onClick={() => updateQty(item.id, item.qty + 1)}
+                                  aria-label="Увеличить количество"
+                                  className="w-6 h-6 flex items-center justify-center text-ink font-medium hover:text-terracotta"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            )}
                             <div className="text-sm font-bold text-ink">
-                              {(item.price * item.qty).toLocaleString('ru-RU')} ₽
+                              {item.isBonus ? 'Бесплатно' : `${(item.price * item.qty).toLocaleString('ru-RU')} ₽`}
                             </div>
                           </div>
                         </div>

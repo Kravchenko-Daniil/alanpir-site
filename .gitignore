@@ -10,6 +10,11 @@ node_modules/
 deploy/
 .next/
 out/
+*.tsbuildinfo
+
+# Tooling (локальные конфиги/инсталляции — не в репо)
+.claude/
+_bmad/
 
 # Databases (dev)
 *.sqlite
@@ -26,6 +31,9 @@ secrets-prod
 
 # Source archives (исходники от Gemini — хранятся только локально)
 *.zip
+
+# Сырьё от клиента (фото/лого/баннеры до обработки) — только локально
+assets-incoming/
 
 # OS / editors
 .DS_Store

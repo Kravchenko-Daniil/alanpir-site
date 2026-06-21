@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
@@ -11,31 +11,39 @@ import OrderSummary from '@/components/checkout/OrderSummary';
 import ContactFields, { isContactValid, type ContactValue } from '@/components/checkout/ContactFields';
 import type { SavedAddress } from '@/lib/address';
 import { useAuthModal } from '@/hooks/useAuthModal';
+import { useCart } from '@/hooks/useCart';
 import { useSavedAddresses } from '@/hooks/useSavedAddresses';
 import { useToast } from '@/hooks/useToast';
 import { api, ApiError, describeApiError } from '@/lib/api';
 
-// Mock Data — корзина пока не подключена к глобальному useCart
-const MOCK_CART = [
-  { id: '1', name: 'Фыдджын (мясной)', weight: '1000 г', price: 1290, qty: 1, imageEmoji: '🥩' },
-  { id: '2', name: 'Цахараджын', weight: '1000 г', price: 1120, qty: 1, imageEmoji: '🍃' },
-  { id: '3', name: 'Морс клюквенный', weight: '1 л', price: 430, qty: 1, imageEmoji: '🥤' },
+interface DeliveryZone {
+  id: string;
+  label: string;
+  minOrder: number;
+  deliveryCost: number | null;
+}
+
+const DELIVERY_ZONES: DeliveryZone[] = [
+  { id: 'nearby', label: 'Соседние станции (Достоевская, Марьина роща)', minOrder: 0, deliveryCost: 0 },
+  { id: 'sadovoe', label: 'Садовое кольцо', minOrder: 1000, deliveryCost: 150 },
+  { id: 'ttk', label: 'ТТК (Третье транспортное кольцо)', minOrder: 1500, deliveryCost: 250 },
+  { id: 'mkad', label: 'В пределах МКАД', minOrder: 2000, deliveryCost: 250 },
+  { id: 'beyond', label: 'За МКАД', minOrder: 5000, deliveryCost: null },
 ];
 
-const MIN_ORDER_FOR_DELIVERY = 2000;
-const FREE_DELIVERY_THRESHOLD = 5000;
-const FLAT_DELIVERY_COST = 140;
+const DEFAULT_ZONE_ID = 'mkad';
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { show } = useToast();
   const { isAuth, name: authName, logout, openAuthModal } = useAuthModal();
-
-  const [cartItems] = useState(MOCK_CART);
+  const { items: cartItems, displayItems, subtotal, clear: clearCart } = useCart();
 
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [deliveryTime, setDeliveryTime] = useState<'asap' | 'scheduled'>('asap');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'sbp' | 'cash'>('card');
+
+  const [zoneId, setZoneId] = useState<string>(DEFAULT_ZONE_ID);
 
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const { addresses, selectedId: selectedAddressId, setSelectedId: setSelectedAddressId, addAddress, removeAddress } = useSavedAddresses();
@@ -45,9 +53,6 @@ export default function CheckoutPage() {
   const [noCall, setNoCall] = useState(false);
   const [needUtensils, setNeedUtensils] = useState(false);
 
-  const [promoCode, setPromoCode] = useState('');
-  const [promoActive, setPromoActive] = useState(false);
-
   const [submitting, setSubmitting] = useState(false);
 
   const handleAddAddress = (addr: SavedAddress) => {
@@ -55,20 +60,18 @@ export default function CheckoutPage() {
     setIsAddingAddress(false);
   };
 
-  const subtotal = useMemo(
-    () => cartItems.reduce((acc, i) => acc + i.price * i.qty, 0),
-    [cartItems],
-  );
-
   const isDelivery = deliveryMethod === 'delivery';
-  const isBelowMinOrder = isDelivery && subtotal < MIN_ORDER_FOR_DELIVERY;
-  const missingForMinOrder = MIN_ORDER_FOR_DELIVERY - subtotal;
+  const selectedZone = DELIVERY_ZONES.find((z) => z.id === zoneId) ?? DELIVERY_ZONES.find((z) => z.id === DEFAULT_ZONE_ID)!;
+
+  const isBelowMinOrder = isDelivery && subtotal < selectedZone.minOrder;
+  const missingForMinOrder = selectedZone.minOrder - subtotal;
 
   let discount = 0;
-  if (promoActive) discount += subtotal * 0.1;
   if (!isDelivery) discount += subtotal * 0.1;
 
-  const deliveryCost = isDelivery ? (subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : FLAT_DELIVERY_COST) : 0;
+  // null deliveryCost («за МКАД» — уточняется у оператора) не добавляем в total как число
+  const deliveryCost = isDelivery ? (selectedZone.deliveryCost ?? 0) : 0;
+  const deliveryUnknown = isDelivery && selectedZone.deliveryCost === null;
   const total = subtotal - discount + deliveryCost;
 
   const selectedAddress = addresses.find((a) => a.id === selectedAddressId) ?? null;
@@ -105,15 +108,17 @@ export default function CheckoutPage() {
           code: selectedAddress.intercom,
         } : null,
         paymentMethod,
-        items: cartItems.map((i) => ({
+        items: displayItems.map((i) => ({
           id: i.id,
           name: i.name,
           title: i.name,
           weight: i.weight,
           price: i.price,
           qty: i.qty,
+          isBonus: i.isBonus ?? false,
         })),
-        promo: promoActive && promoCode ? promoCode : null,
+        promo: null,
+        deliveryZone: isDelivery ? selectedZone.label : null,
         subtotal,
         discount: Math.round(discount),
         delivery: deliveryCost,
@@ -129,6 +134,7 @@ export default function CheckoutPage() {
         body: JSON.stringify(payload),
       });
 
+      clearCart();
       router.push(`/order/?id=${res.orderId}`);
     } catch (err) {
       if (err instanceof ApiError) {
@@ -283,6 +289,19 @@ export default function CheckoutPage() {
                   </div>
 
                   <div>
+                    <h3 className="text-sm font-bold text-ink mb-3 font-sans">Зона доставки</h3>
+                    <select
+                      value={zoneId}
+                      onChange={(e) => setZoneId(e.target.value)}
+                      className="w-full h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none text-sm"
+                    >
+                      {DELIVERY_ZONES.map((z) => (
+                        <option key={z.id} value={z.id}>{z.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
                     <h3 className="text-sm font-bold text-ink mb-3 font-sans">Когда доставить?</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       <label className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${deliveryTime === 'asap' ? 'border-terracotta bg-terracotta/5' : 'border-border-warm bg-surface hover:bg-bg-warm'}`}>
@@ -331,7 +350,7 @@ export default function CheckoutPage() {
 
                   <div className="bg-bg-warm rounded-xl p-3 flex items-start gap-2 text-xs text-muted">
                     <Info className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
-                    <p>Доставка по Москве от 20 ₽/км. Минимальный заказ 2000 ₽. Бесплатно при заказе от 5000 ₽.</p>
+                    <p>Соседние станции — бесплатно, без минимума. Садовое кольцо — от 1000 ₽, 150 ₽. ТТК — от 1500 ₽, 250 ₽. В пределах МКАД — от 2000 ₽, 250 ₽. За МКАД — от 5000 ₽, стоимость уточняется у оператора.</p>
                   </div>
                 </motion.div>
               ) : (
@@ -348,7 +367,7 @@ export default function CheckoutPage() {
                     <div className="border border-border-warm rounded-xl overflow-hidden">
                       <div className="p-4 bg-surface">
                         <div className="font-medium text-ink text-sm mb-1">Москва, ул. Трифоновская, 4</div>
-                        <div className="text-xs text-muted">Ежедневно с 08:30 до 19:00</div>
+                        <div className="text-xs text-muted">Ежедневно 7:40–20:00</div>
                       </div>
                       <iframe
                         src="https://yandex.ru/map-widget/v1/?ll=37.6229%2C55.7925&mode=search&oid=1111111111&ol=biz&z=16&text=%D1%83%D0%BB.%20%D0%A2%D1%80%D0%B8%D1%84%D0%BE%D0%BD%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%204%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"
@@ -364,7 +383,7 @@ export default function CheckoutPage() {
 
                   <div className="bg-terracotta/10 border border-terracotta/20 rounded-xl p-3 flex items-start gap-2 text-sm text-terracotta">
                     <Info className="w-5 h-5 shrink-0" />
-                    <p>При самовывозе действует <b>скидка 10%</b> (не суммируется с промокодами и сетами).</p>
+                    <p>При самовывозе действует <b>скидка 10%</b> на весь заказ.</p>
                   </div>
 
                   <div>
@@ -495,16 +514,12 @@ export default function CheckoutPage() {
         {/* Right Column: Order Summary */}
         <div className="relative">
           <OrderSummary
-            items={cartItems}
+            items={displayItems}
             deliveryMethod={deliveryMethod}
-            promoCode={promoCode}
-            promoActive={promoActive}
-            onPromoCodeChange={setPromoCode}
-            onApplyPromo={() => { if (promoCode.trim()) setPromoActive(true); }}
-            onRemovePromo={() => { setPromoActive(false); setPromoCode(''); }}
             subtotal={subtotal}
             discount={discount}
             deliveryCost={deliveryCost}
+            deliveryUnknown={deliveryUnknown}
             total={total}
             isBelowMinOrder={isBelowMinOrder}
             missingForMinOrder={missingForMinOrder}

@@ -133,7 +133,7 @@ async function sendOrderEmail(orderRow, payload) {
     const items = Array.isArray(payload?.items) ? payload.items : [];
     const itemsHtml = items.map(i => `
       <tr>
-        <td style="padding:6px 8px; border:1px solid #eee;">${escapeHtml(i.title || i.name || '')}</td>
+        <td style="padding:6px 8px; border:1px solid #eee;">${escapeHtml((i.title || i.name || '') + (i.isBonus ? ' (бонус)' : ''))}</td>
         <td style="padding:6px 8px; border:1px solid #eee; text-align:center;">${i.qty}</td>
         <td style="padding:6px 8px; border:1px solid #eee; text-align:right;">${(i.price*i.qty).toLocaleString('ru-RU')} ₽</td>
       </tr>`).join('');

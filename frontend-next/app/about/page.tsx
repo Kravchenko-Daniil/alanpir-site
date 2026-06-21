@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
-import { CheckCircle2, Heart, Users, Wheat } from 'lucide-react';
+import { CheckCircle2, ChefHat, Eye, Flame, Heart, MapPin, Users, Wheat } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'О пекарне',
@@ -16,11 +15,50 @@ export default function AboutPage() {
         <h1 className="text-4xl md:text-5xl mb-6 text-ink">О пекарне АланПир</h1>
         <div className="text-lg text-muted space-y-4 mb-12">
           <p>
-            Мы готовим настоящие осетинские пироги по традиционным рецептам, которые передаются в нашей семье из поколения в поколение. Наша главная цель — доставить вам не просто еду, а частичку кавказского тепла и гостеприимства.
+            <strong className="text-ink">АланПир</strong> — кафе-пекарня осетинских пирогов в центре Москвы. Мы готовим настоящие осетинские пироги по традиционным рецептам — с тонким тестом, большим количеством начинки, и выпекаем каждый пирог только после заказа.
           </p>
           <p>
-            Каждый пирог лепится вручную только после вашего заказа. Мы не используем замороженные полуфабрикаты и искусственные добавки.
+            Главное для нас — чтобы гости видели, как готовится их еда. Поэтому в АланПир открытая кухня: вы можете наблюдать весь процесс — от раскатки теста до горячего пирога из печи.
           </p>
+          <p>
+            В нашей пекарне работают повара из Осетии, которые знают традиции приготовления настоящих осетинских пирогов и сохраняют тот самый вкус, за который их любят уже много лет.
+          </p>
+          <p>
+            Мы не работаем как безликая фабрика доставки. У нас есть настоящее кафе, куда можно прийти, попробовать пироги прямо из печи или заказать доставку горячих пирогов по Москве.
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-6 mb-12">
+        <div className="bg-surface p-3 md:p-4 rounded-xl sm:rounded-2xl border border-border-warm flex flex-col items-center text-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-bg-warm rounded-full flex items-center justify-center text-accent shrink-0">
+            <ChefHat className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <span className="text-[11px] sm:text-xs md:text-sm font-bold text-ink leading-tight text-balance">Печём под заказ</span>
+        </div>
+        <div className="bg-surface p-3 md:p-4 rounded-xl sm:rounded-2xl border border-border-warm flex flex-col items-center text-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-bg-warm rounded-full flex items-center justify-center text-accent shrink-0">
+            <Flame className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <span className="text-[11px] sm:text-xs md:text-sm font-bold text-ink leading-tight text-balance">Доставляем горячими</span>
+        </div>
+        <div className="bg-surface p-3 md:p-4 rounded-xl sm:rounded-2xl border border-border-warm flex flex-col items-center text-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-bg-warm rounded-full flex items-center justify-center text-accent shrink-0">
+            <MapPin className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <span className="text-[11px] sm:text-xs md:text-sm font-bold text-ink leading-tight text-balance">Работаем в центре Москвы</span>
+        </div>
+        <div className="bg-surface p-3 md:p-4 rounded-xl sm:rounded-2xl border border-border-warm flex flex-col items-center text-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-bg-warm rounded-full flex items-center justify-center text-accent shrink-0">
+            <Users className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <span className="text-[11px] sm:text-xs md:text-sm font-bold text-ink leading-tight text-balance">Повара из Осетии</span>
+        </div>
+        <div className="bg-surface p-3 md:p-4 rounded-xl sm:rounded-2xl border border-border-warm flex flex-col items-center text-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-bg-warm rounded-full flex items-center justify-center text-accent shrink-0">
+            <Eye className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+          </div>
+          <span className="text-[11px] sm:text-xs md:text-sm font-bold text-ink leading-tight text-balance">Открытая кухня</span>
         </div>
       </div>
 

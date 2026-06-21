@@ -6,7 +6,7 @@
 
 Сайт ресторана осетинских пирогов **АланПир** (`alanpir.ru`).
 Два фронтенда параллельно в репо: **старый статический** (`frontend/`) и **новый на Next.js** (`frontend-next/`). Идёт переход на новый.
-Backend — Node.js + Express + SQLite (`backend/`). **Задеплоен на vps-4vps** через pm2, слушает 3001, проксируется nginx на `/api/`.
+Backend — Node.js + Express + SQLite (`backend/`). **Задеплоен на боевой VPS Рамиля (Beget)** через pm2, слушает 3000, проксируется nginx на `/api/`. Прод запущен на `https://alanpir.ru` (фронт+бэк на одном VPS, домен за Cloudflare).
 
 GitHub: https://github.com/Kravchenko-Daniil/site-alanpir
 
@@ -28,19 +28,22 @@ pirogi/
 │   │   ├── api.ts        # fetch-обёртка с NEXT_PUBLIC_API_BASE + ApiError + describeApiError
 │   │   └── validation.ts # isValidPhone/Email/Name/Password
 │   └── public/        # favicon.svg, apple-touch-icon.svg
-├── backend/           # Node.js API (Express + SQLite + nodemailer + DaData). Deployed → vps-4vps.
+├── backend/           # Node.js API (Express + SQLite + nodemailer + DaData). Deployed → Beget VPS 159.194.222.86.
 ├── scripts/           # prepare-deploy.mjs — упаковка СТАРОГО frontend + backend (не используется для NEW)
 ├── docs/              # tz.md, content.md, deploy.md, design-brief*.md, roadmap.md
 ├── archive/           # parser/ (Python), exampl/ (демо DaData)
 └── deploy/            # ГЕНЕРИРУЕТСЯ, в git не коммитить
 ```
 
-## Backend API (vps-4vps)
+## Backend API (боевой VPS Рамиля — Beget «Glad Benedict»)
 
-- **Публичный URL**: `http://185.177.238.230/api/...` (nginx → 127.0.0.1:3001)
-- **На VPS**: `/opt/alanpir-api/`, запущен через `pm2 start server.js --name alanpir-api`, autostart через systemd
-- **БД**: SQLite в `/opt/alanpir-api/data.sqlite` (WAL)
-- **Дикрет**: `/opt/alanpir-api/.env` — PORT=3001, DADATA_TOKEN, DADATA_PUBLIC_TOKEN, SMTP_* (если настроены)
+- **Прод-домен**: `https://alanpir.ru/api/...` (Cloudflare → nginx :443 → 127.0.0.1:3000). Фронт и бэк на ОДНОМ VPS, один домен — никакого cross-origin/mixed content.
+- **VPS**: `159.194.222.86` (Beget, Ubuntu 24.04, 1 CPU / 1 GB). SSH: `ssh -i ~/.ssh/id_ed25519_daniil_wsl root@159.194.222.86` (мой ключ залит, пароль не нужен).
+- **На VPS**: `/opt/alanpir-api/`, `pm2 start server.js --name alanpir-api`, autostart через `pm2-root` (enabled). Фронт-статика — `/var/www/alanpir/`.
+- **БД**: SQLite в `/opt/alanpir-api/data.sqlite` — свежая, прод стартовал с чистой базой (тестовые данные со старых VPS не переносились).
+- **Секреты**: `/opt/alanpir-api/.env` — PORT=3000, DADATA_TOKEN, DADATA_PUBLIC_TOKEN, SMTP_* (SMTP_USER/PASS пока пустые → заказы пишутся в БД, но email не уходит).
+- **SSL**: Cloudflare Universal (браузер↔CF) + self-signed origin-cert `/etc/ssl/alanpir-origin.*` (CF↔origin, режим Full). Продлевать ничего не надо.
+- **DNS**: домен `alanpir.ru` управляется в Cloudflare (NS angela/kenneth.ns.cloudflare.com). `A alanpir.ru` и `A www` (Proxied) → `159.194.222.86`. Почта (`MX`/`mail`/`smtp`/`pop`/`ftp`/`TXT spf`) осталась на REG.RU (31.31.197.33) — не трогать без решения Рамиля по ящикам `@alanpir.ru`.
 
 ### Готовые endpoints
 
@@ -58,29 +61,38 @@ pirogi/
 ### Быстрые команды
 
 ```bash
-ssh vps-4vps 'pm2 status'                                 # статус бэка
-ssh vps-4vps 'pm2 logs alanpir-api --nostream --lines 30' # последние логи
-ssh vps-4vps 'pm2 restart alanpir-api'                    # перезапуск (после правки .env)
-ssh vps-4vps 'cat /etc/nginx/sites-enabled/alanpir-next'  # nginx-конфиг (проксирует /api/)
-curl http://185.177.238.230/api/config                    # health-check
+VPS="ssh -i ~/.ssh/id_ed25519_daniil_wsl root@159.194.222.86"
+$VPS 'pm2 status'                                  # статус бэка
+$VPS 'pm2 logs alanpir-api --nostream --lines 30'  # последние логи
+$VPS 'pm2 restart alanpir-api'                      # перезапуск (после правки .env)
+$VPS 'cat /etc/nginx/sites-enabled/alanpir'         # nginx-конфиг (80+443, проксирует /api/)
+curl https://alanpir.ru/api/config                  # health-check (через Cloudflare)
 ```
 
 ### Как перезалить бэк после правок
 
 ```bash
-rsync -az --exclude node_modules --exclude '*.sqlite*' --exclude '.env*' backend/ vps-4vps:/opt/alanpir-api/
-ssh vps-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-api'
+KEY=~/.ssh/id_ed25519_daniil_wsl; VPS=root@159.194.222.86
+rsync -az -e "ssh -i $KEY" --exclude node_modules --exclude '*.sqlite*' --exclude '.env*' backend/ $VPS:/opt/alanpir-api/
+ssh -i $KEY $VPS 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-api'
 # .env — только scp, если поменял локально:
-# scp backend/.env vps-4vps:/opt/alanpir-api/.env && ssh vps-4vps 'pm2 restart alanpir-api'
+# scp -i $KEY backend/.env $VPS:/opt/alanpir-api/.env && ssh -i $KEY $VPS 'pm2 restart alanpir-api'
 ```
 
-## Превью на VPS (dev-среда)
+## Прод-деплой (боевой VPS)
 
-- **URL**: http://185.177.238.230/
-- **SSH**: `ssh vps-4vps` (ключ в `~/.ssh/vps-4vps`, хост в `~/.ssh/config`)
-- **VPS**: Ubuntu 24.04, Node 20, nginx на :80 отдаёт `/var/www/alanpir-next/` + проксирует `/api/` → `127.0.0.1:3001`
-- **Деплой фронта**: `cd frontend-next && npm run build && ssh vps-4vps 'rm -rf /var/www/alanpir-next/*' && scp -r out/. vps-4vps:/var/www/alanpir-next/`
-- VPS клиент удалит через ~10 дней — это временно, для показа. Прод-деплой будет в ISPmanager на REG.RU (фронт) + отдельный долгий VPS (бэк).
+Фронт и бэк живут на одном VPS `159.194.222.86` за Cloudflare. Старый временный my-hetzner снесён 2026-06-11 (`/opt/alanpir-cleanup.sh` отработал, остался только wado-vpn — чужой).
+
+- **Деплой фронта**:
+  ```bash
+  KEY=~/.ssh/id_ed25519_daniil_wsl
+  cd frontend-next && NEXT_PUBLIC_API_BASE= npm run build
+  rsync -az --delete -e "ssh -i $KEY" out/ root@159.194.222.86:/var/www/alanpir/
+  ```
+  `NEXT_PUBLIC_API_BASE=` (пустая) обязательна — фронт делает relative `/api/`-запросы на тот же домен, ничего не зашивается в bundle.
+- **nginx** (`/etc/nginx/sites-available/alanpir`): server 80 (CF Always-Use-HTTPS редиректит на 443) + server 443 ssl (origin-cert) → root `/var/www/alanpir` + `location /api/` proxy на `127.0.0.1:3000`.
+- **Cloudflare**: Proxied (оранжевое облако) на `alanpir.ru`+`www`, SSL/TLS = **Full**, Always Use HTTPS = On.
+- **REG.RU**: остаётся только как регистратор домена (NS уже на Cloudflare) и почта на shared Host-0. Хостинг Host-0 и платный DomainSSL для сайта больше не нужны (SSL даёт Cloudflare) — Рамиль может не продлевать, НО сначала решить судьбу почты `@alanpir.ru`.
 
 ## Данные бренда (актуальные)
 
@@ -110,12 +122,13 @@ ssh vps-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-ap
 - **Яндекс.Карта** на checkout-самовывозе (iframe, Трифоновская 4)
 - **Аналитика**: заготовки YM + GA, ID-шки в `lib/seo.ts` как `null`
 - **Правовые страницы**: `/privacy/` и `/offer/` с полными реквизитами
-- **Backend развёрнут на vps-4vps**: Node 20 + pm2 + SQLite + nginx proxy
+- **🚀 ПРОД ЗАПУЩЕН (2026-06-11)**: `https://alanpir.ru` на боевом VPS Рамиля (Beget 159.194.222.86) за Cloudflare. Фронт+бэк на одном VPS, Node 20 + pm2 + SQLite + nginx, SSL через Cloudflare (Full). Старый временный my-hetzner снесён.
 - **Настоящий auth** через `/api/auth/*` с persistence в localStorage (`useAuthModal`). Колонка `users.name` + runtime-миграция — имя хранится в БД и возвращается при login.
 - **История заказов** на `/account/` — fetch `/api/orders?phone=` с loading/empty/error состояниями. Phone всегда нормализуется до `+7XXXXXXXXXX` (и на INSERT, и на GET), runtime-миграция поправила уже записанные заказы.
 - **Отправка заказа** через `/api/orders` с редиректом на `/order?id=X` и показом реального заказа из `/api/orders/:id`
 - **Адресное автодополнение** — свой `AddressAutocomplete` через серверный `/api/suggest/address` (DaData secret скрыт на бэке)
 - **Общее хранилище сохранённых адресов** — `useSavedAddresses` + `localStorage` (`alanpir:addresses`). `/checkout/` и `/account/` читают/пишут один и тот же список.
+- **Бонусный пирог с капустой (2026-06-21)**: при `subtotal > 3000 ₽` автоматически добавляется бесплатный «Кабускаджын» 1 кг (`price:0`, «Бонус»). Виртуальный (производный) item в `useCart` через `useMemo` — `bonusItem`/`displayItems`, не пишется в state/localStorage. Виден в CartDrawer, OrderSummary, payload заказа и письме (` (бонус)`). Залит на прод (фронт + `server.js`). ТЗ: `docs/task-bonus-pirog.md`.
 
 ### ⚠️ Известные проблемы
 - *нет открытых багов на 2026-04-17*
@@ -128,7 +141,7 @@ ssh vps-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-ap
 | Финальный лого | Рамиль делает через GPT | Заменить временный в Header + Footer + favicon |
 | Фото пирогов | Клиент, фотосессия | Заполнить `image` в `lib/menu.ts` |
 | Тексты «О нас», «Доставка» | Клиент | Сейчас заглушки от Gemini |
-| Доступ в ISPmanager REG.RU | Клиент | Финальный деплой фронта на alanpir.ru |
+| Решение по почте `@alanpir.ru` | Рамиль | MX/mail-записи остались на REG.RU Host-0. Если не продлевать хостинг — решить, нужна ли почта на домене |
 
 ### ⏸️ Заглушки в коде
 - **Промокоды**: UI-поле применяет фиксированную 10%-скидку, без бизнес-правил от клиента
@@ -136,28 +149,25 @@ ssh vps-4vps 'cd /opt/alanpir-api && npm ci --omit=dev && pm2 restart alanpir-ap
 - **Адреса привязаны к браузеру, не к пользователю**: `useSavedAddresses` хранит их в `localStorage`. Не переезжают между устройствами/сессиями. Настоящее решение — таблица `addresses` за `user_id` на бэке (пункт 3.2 roadmap).
 - **Валидация зоны доставки (МКАД)**: сейчас фильтр DaData только по городу Москва. Серверная проверка beltway_hit + расчёт delivery по beltway_distance — пункт 3.3 roadmap
 - **Выбор интервала доставки**: select-ы со «статическими» интервалами. Реальный расчёт времени — в будущем вместе с курьерской интеграцией
-- **Email по заказу**: код написан, ждёт SMTP-креды в `backend/.env`
-- **Тестовый юзер** `+7 (999) 777-11-99` лежит в БД на vps-4vps без имени (был создан моим curl'ом до миграции колонки `name`). Либо удалить, либо игнорировать.
+- **Email по заказу**: код написан, ждёт SMTP-креды в `backend/.env` (на проде SMTP_USER/PASS пустые)
 
 ## Как запускать
 
 ```bash
 cd frontend-next
 npm install
-npm run dev          # http://localhost:3000 (обращается к http://185.177.238.230/api/*)
+npm run dev          # http://localhost:3000 (для локального API задать NEXT_PUBLIC_API_BASE в .env.local)
 npm run build        # статика в out/
 ```
 
 ## Деплой
 
-**Фронт на превью-VPS (текущий):**
+Боевой деплой фронта на VPS `159.194.222.86` (за Cloudflare) — см. секцию **«Прод-деплой (боевой VPS)»** выше. Кратко:
 ```bash
-cd frontend-next && npm run build
-ssh vps-4vps 'rm -rf /var/www/alanpir-next/*'
-scp -r out/. vps-4vps:/var/www/alanpir-next/
+KEY=~/.ssh/id_ed25519_daniil_wsl
+cd frontend-next && NEXT_PUBLIC_API_BASE= npm run build
+rsync -az --delete -e "ssh -i $KEY" out/ root@159.194.222.86:/var/www/alanpir/
 ```
-
-**Прод REG.RU (когда будем готовы):** собрать `out/`, залить через ISPmanager в корень домена. Бэк останется на отдельном VPS — нужен будет долгосрочный (не vps-4vps).
 
 ## Ключевые ограничения (НЕ нарушать)
 
@@ -167,8 +177,8 @@ scp -r out/. vps-4vps:/var/www/alanpir-next/
 - **Динамические роуты `[id]` несовместимы** со статическим экспортом — `/order` использует `?id=XXX`
 - В `globals.css` **оставить legacy-alias `--color-terracotta`** = `--color-accent`, иначе чекаут/кабинет/модалки посыпятся
 - **Секреты и токены**:
-  - `backend/.env` — серверные: `DADATA_TOKEN` (secret), `DADATA_PUBLIC_TOKEN`, SMTP-пароли. Живёт на vps-4vps как `/opt/alanpir-api/.env`.
-  - `frontend-next/.env.local` — клиентские: `NEXT_PUBLIC_API_BASE=http://185.177.238.230`. Раньше был `NEXT_PUBLIC_DADATA_TOKEN` (для прямого клиентского вызова DaData) — после перехода на серверный прокси больше не используется, можно удалить строку.
+  - `backend/.env` — серверные: `DADATA_TOKEN` (secret), `DADATA_PUBLIC_TOKEN`, SMTP-пароли. Живёт на боевом VPS как `/opt/alanpir-api/.env` (159.194.222.86).
+  - `frontend-next/.env.local` — клиентские. На проде `NEXT_PUBLIC_API_BASE=` ПУСТАЯ (relative `/api/` на тот же домен). Раньше был `NEXT_PUBLIC_DADATA_TOKEN` (прямой клиентский вызов DaData) — после перехода на серверный прокси не используется, можно удалить строку.
   - Только `NEXT_PUBLIC_*` попадают в бандл браузера.
   - `.env*` в `.gitignore` обеих папок.
 

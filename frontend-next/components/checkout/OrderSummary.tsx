@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Plus, X, AlertCircle, Loader2 } from 'lucide-react';
+import { Plus, AlertCircle, Loader2 } from 'lucide-react';
 
 export interface CartItem {
   id: string;
@@ -12,23 +12,19 @@ export interface CartItem {
   qty: number;
   imageUrl?: string;
   imageEmoji?: string;
+  isBonus?: boolean;
 }
 
 interface OrderSummaryProps {
   items: CartItem[];
   deliveryMethod: 'delivery' | 'pickup';
 
-  /** Промокод */
-  promoCode: string;
-  promoActive: boolean;
-  onPromoCodeChange: (v: string) => void;
-  onApplyPromo: () => void;
-  onRemovePromo: () => void;
-
   /** Подсчитанные суммы (вычислены в родителе) */
   subtotal: number;
   discount: number;
   deliveryCost: number;
+  /** true для зоны «за МКАД» — стоимость доставки уточняется у оператора */
+  deliveryUnknown: boolean;
   total: number;
   isBelowMinOrder: boolean;
   missingForMinOrder: number;
@@ -41,14 +37,10 @@ interface OrderSummaryProps {
 export default function OrderSummary({
   items,
   deliveryMethod,
-  promoCode,
-  promoActive,
-  onPromoCodeChange,
-  onApplyPromo,
-  onRemovePromo,
   subtotal,
   discount,
   deliveryCost,
+  deliveryUnknown,
   total,
   isBelowMinOrder,
   missingForMinOrder,
@@ -77,10 +69,13 @@ export default function OrderSummary({
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold text-ink truncate">{item.name}</div>
-              <div className="text-xs text-muted">{item.weight} • {item.qty} шт</div>
+              <div className="text-xs text-muted">
+                {item.weight} • {item.qty} шт
+                {item.isBonus && <span className="text-terracotta font-semibold"> • Бонус</span>}
+              </div>
             </div>
             <div className="text-sm font-bold text-ink whitespace-nowrap">
-              {(item.price * item.qty).toLocaleString('ru-RU')} ₽
+              {item.isBonus ? 'Бесплатно' : `${(item.price * item.qty).toLocaleString('ru-RU')} ₽`}
             </div>
           </div>
         ))}
@@ -93,35 +88,6 @@ export default function OrderSummary({
 
       <hr className="border-border-warm" />
 
-      {/* Promo Code */}
-      <div>
-        {!promoActive ? (
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={promoCode}
-              onChange={(e) => onPromoCodeChange(e.target.value)}
-              placeholder="Промокод"
-              className="flex-1 h-12 px-4 rounded-xl border border-border-warm bg-surface focus:border-terracotta focus:outline-none transition-colors text-sm"
-            />
-            <button
-              type="button"
-              onClick={onApplyPromo}
-              className="h-12 px-6 rounded-xl bg-ink text-white text-sm font-medium hover:bg-opacity-90 transition-opacity"
-            >
-              Применить
-            </button>
-          </div>
-        ) : (
-          <div className="inline-flex items-center gap-2 bg-[#34C759]/10 text-[#34C759] px-3 py-2 rounded-lg text-sm font-medium border border-[#34C759]/20">
-            Промокод −10% активен
-            <button type="button" onClick={onRemovePromo} className="hover:opacity-70">
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        )}
-      </div>
-
       {/* Totals */}
       <div className="flex flex-col gap-2 text-sm">
         <div className="flex justify-between text-muted">
@@ -130,14 +96,14 @@ export default function OrderSummary({
         </div>
         {discount > 0 && (
           <div className="flex justify-between text-terracotta">
-            <span>Скидка:</span>
+            <span>Скидка за самовывоз −10%:</span>
             <span>−{Math.round(discount).toLocaleString('ru-RU')} ₽</span>
           </div>
         )}
         {isDelivery && (
           <div className="flex justify-between text-muted">
             <span>Доставка:</span>
-            <span>{deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} ₽`}</span>
+            <span>{deliveryUnknown ? 'уточняется у оператора' : deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} ₽`}</span>
           </div>
         )}
 

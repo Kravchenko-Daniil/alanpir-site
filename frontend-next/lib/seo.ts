@@ -62,15 +62,9 @@ export function restaurantJsonLd() {
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '08:30',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '07:40',
         closes: '20:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Saturday', 'Sunday'],
-        opens: '10:00',
-        closes: '17:00',
       },
     ],
     hasDeliveryMethod: 'http://purl.org/goodrelations/v1#DeliveryModeOwnFleet',

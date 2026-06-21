@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { MessageCircle } from 'lucide-react';
+
+const MAX_URL = 'https://max.ru/AlanPir';
 
 export default function Footer() {
   return (
@@ -9,13 +12,20 @@ export default function Footer() {
           {/* Column 1: Contacts */}
           <div className="flex flex-col gap-3 md:gap-4 text-sm">
             <Link href="/" className="inline-block mb-1 md:mb-2">
-              <span className="font-serif text-2xl font-black tracking-tight text-accent uppercase">
-                АЛАНПИР
-              </span>
+              <img src="/logo-alanpir.png" alt="АланПир" className="h-12 w-auto object-contain" />
             </Link>
             <a href="tel:+79264990099" className="text-xl md:text-2xl font-bold hover:text-accent transition-colors">+7 (926) 499-00-99</a>
             <a href="https://wa.me/79264990099" className="text-white/70 hover:text-accent transition-colors font-medium">Написать в WhatsApp</a>
-            <a href="mailto:rizvanovibragim@yandex.ru" className="text-white/70 hover:text-accent transition-colors">rizvanovibragim@yandex.ru</a>
+            <div className="flex items-center gap-3 mt-1">
+              <a
+                href={MAX_URL}
+                aria-label="Max"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-accent text-white flex items-center justify-center transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
+            </div>
+            <a href="mailto:rizvanovibragim@yandex.ru" className="text-white/70 hover:text-accent transition-colors mt-1">rizvanovibragim@yandex.ru</a>
             <span className="text-white/70 mt-1 md:mt-2">Москва, Трифоновская 4</span>
           </div>
 
@@ -23,10 +33,15 @@ export default function Footer() {
           <div className="flex flex-col gap-2 md:gap-3 text-sm">
             <h4 className="font-serif text-lg font-bold mb-1 md:mb-2 text-white">Режим работы</h4>
             <span className="text-white/70 font-bold text-white uppercase text-xs tracking-wide">Приём заказов:</span>
-            <span className="text-white/70">будни: 08:30–20:00</span>
-            <span className="text-white/70">выходные: 10:00–17:00</span>
+            <span className="text-white/70">круглосуточно</span>
+            <span className="text-white/70 font-bold text-white uppercase text-xs tracking-wide mt-2">Пекарня:</span>
+            <span className="text-white/70">ежедневно 7:40–20:00</span>
             <span className="text-white/70 font-bold text-white uppercase text-xs tracking-wide mt-2">Доставка:</span>
-            <span className="text-white/70">40–120 минут по Москве</span>
+            <span className="text-white/70">Соседние станции — бесплатно</span>
+            <span className="text-white/70">Садовое — от 1000 ₽, 150 ₽</span>
+            <span className="text-white/70">ТТК — от 1500 ₽, 250 ₽</span>
+            <span className="text-white/70">В пределах МКАД — от 2000 ₽, 250 ₽</span>
+            <span className="text-white/70">За МКАД — от 5000 ₽, по согласованию</span>
           </div>
 
           {/* Column 3: Navigation */}

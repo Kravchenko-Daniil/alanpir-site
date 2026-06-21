@@ -2,16 +2,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ShoppingCart, Menu, User, PhoneCall, X } from 'lucide-react';
+import { ShoppingCart, Menu, User, PhoneCall, X, MessageCircle } from 'lucide-react';
+
+const MAX_URL = 'https://max.ru/AlanPir';
 import { useCart } from '@/hooks/useCart';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
-  const { openCart, items } = useCart();
+  const { openCart, totalQty } = useCart();
   const { openAuthModal, isAuth } = useAuthModal();
   const router = useRouter();
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleUserClick = () => {
@@ -19,7 +21,7 @@ export default function Header() {
     else openAuthModal();
   };
 
-  const cartItemsCount = items.length;
+  const cartItemsCount = totalQty;
 
   return (
     <>
@@ -33,9 +35,11 @@ export default function Header() {
             </button>
             <div className="flex flex-col justify-center">
               <Link href="/" className="flex items-center group">
-                <span className="font-serif text-2xl sm:text-2xl md:text-3xl font-black tracking-tight text-accent uppercase leading-none hover:opacity-80 transition-opacity">
-                  АЛАНПИР
-                </span>
+                <img
+                  src="/logo-alanpir.png"
+                  alt="АланПир"
+                  className="h-10 w-auto object-contain hover:opacity-80 transition-opacity"
+                />
               </Link>
               {/* Mobile Phone (visible only < sm) */}
               <a href="tel:+79264990099" className="sm:hidden flex items-center gap-1.5 text-[13px] font-bold text-ink hover:text-accent transition-colors mt-1">
@@ -78,11 +82,20 @@ export default function Header() {
                 </span>
               </span>
               <span className="hidden xl:block text-[10px] text-muted font-medium mt-0.5 whitespace-nowrap">
-                Приём заказов: будни 8:30–20:00 · выходные 10:00–17:00
+                Приём заказов круглосуточно · пекарня 7:40–20:00
               </span>
             </a>
 
-            <button 
+            <a
+              href={MAX_URL}
+              aria-label="Max"
+              className="hidden lg:flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full bg-bg-warm text-ink hover:text-accent transition-colors shrink-0"
+              title="Max"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </a>
+
+            <button
               onClick={handleUserClick}
               className="hidden lg:flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full bg-bg-warm text-ink hover:text-accent transition-colors shrink-0"
               title="Личный кабинет"
@@ -116,9 +129,9 @@ export default function Header() {
           />
           <div className="relative w-[300px] max-w-[85vw] h-full bg-surface shadow-2xl p-6 flex flex-col z-10 animate-in slide-in-from-left duration-300">
             <div className="flex justify-between items-center mb-10">
-              <span className="font-serif text-2xl font-black tracking-tight text-accent uppercase leading-none">
-                АЛАНПИР
-              </span>
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                <img src="/logo-alanpir.png" alt="АланПир" className="h-10 w-auto object-contain" />
+              </Link>
               <button onClick={() => setIsMenuOpen(false)} className="text-muted hover:text-ink p-1 -mr-1">
                 <X className="w-6 h-6" />
               </button>
@@ -139,9 +152,8 @@ export default function Header() {
                 +7 (926) 499-00-99
               </a>
               <div className="flex flex-col gap-1 text-xs text-muted font-medium">
-                <span>Приём заказов:</span>
-                <span>будни: 08:30–20:00</span>
-                <span>выходные: 10:00–17:00</span>
+                <span>Приём заказов: круглосуточно</span>
+                <span>Пекарня: ежедневно 7:40–20:00</span>
               </div>
             </div>
           </div>
