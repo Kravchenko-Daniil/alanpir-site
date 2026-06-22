@@ -33,20 +33,13 @@ export default function Header() {
             <button onClick={() => setIsMenuOpen(true)} className="lg:hidden text-ink p-1.5 -ml-1.5">
               <Menu className="w-6 h-6" />
             </button>
-            <div className="flex flex-col justify-center">
-              <Link href="/" className="flex items-center group">
-                <img
-                  src="/logo-alanpir.png"
-                  alt="АланПир"
-                  className="h-10 w-auto object-contain hover:opacity-80 transition-opacity"
-                />
-              </Link>
-              {/* Mobile Phone (visible only < sm) */}
-              <a href="tel:+79264990099" className="sm:hidden flex items-center gap-1.5 text-[13px] font-bold text-ink hover:text-accent transition-colors mt-1">
-                <PhoneCall className="w-3.5 h-3.5 text-accent" />
-                <span>+7 (926) 499-00-99</span>
-              </a>
-            </div>
+            <Link href="/" className="flex items-center group shrink-0">
+              <img
+                src="/logo-alanpir.png"
+                alt="АланПир"
+                className="h-10 w-auto object-contain hover:opacity-80 transition-opacity"
+              />
+            </Link>
             
             {/* Nav: Desktop (Visible lg+) */}
             <nav className="hidden lg:block ml-2 xl:ml-6">
@@ -69,6 +62,12 @@ export default function Header() {
               </ul>
             </nav>
           </div>
+
+          {/* Mobile Phone — inline on one row (< sm) */}
+          <a href="tel:+79264990099" className="sm:hidden flex items-center gap-1.5 text-[13px] font-bold text-ink hover:text-accent transition-colors whitespace-nowrap min-w-0">
+            <PhoneCall className="w-4 h-4 text-accent shrink-0" />
+            <span>+7 (926) 499-00-99</span>
+          </a>
 
           {/* Right: Phone (tablet/desktop) + Actions */}
           <div className="flex items-center gap-2 sm:gap-4 md:gap-5 shrink-0">
