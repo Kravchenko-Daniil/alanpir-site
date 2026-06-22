@@ -61,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
       </button>
 
-      <h4 className="font-sans text-lg font-semibold text-ink mb-3 line-clamp-2">{product.title}</h4>
+      <h4 className="font-sans text-lg font-semibold text-ink mb-3">{product.title}</h4>
 
       {hasWeights && product.weights.length > 1 && (
         <div className="flex gap-1.5 mb-3 flex-wrap">
